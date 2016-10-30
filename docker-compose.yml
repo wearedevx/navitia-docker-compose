@@ -15,32 +15,32 @@ services:
     build: ./kraken
     volumes:
       - ./data/default:/srv/data
+    volumes_from:
+      - tyr_worker:ro
     links:
       - rabbitmq
 
   jormungandr:
-    environment:
-      - DOMAIN_NAME=navitia2-ws.local.canaltp.fr
-    image: zibok/navitia2:2.5.0
-    working_dir: /srv/navitia/source/jormungandr/jormungandr/
-    command: /bin/bash -c 'JORMUNGANDR_CONFIG_FILE="/srv/navitia/run/jormungandr_settings.py" PYTHONPATH="/srv/navitia/source/navitiacommon:/srv/navitia/source/jormungandr" python "/srv/navitia/source/jormungandr/jormungandr/manage.py" runserver -r -t 0.0.0.0 -p 80'
-    volumes:
-      - ./jormungandr.d:/etc/jormungandr.d
-      - ./jormungandr_settings.py:/srv/navitia/run/jormungandr_settings.py
+    build: ./jormungandr
     links:
       - kraken_default
       - rabbitmq
       - database
 
-  tyr:
-    environment:
-      - DOMAIN_NAME=tyr.local.canaltp.fr
-    image: zibok/navitia2:2.5.0
-    working_dir: /srv/navitia/source/tyr
-    command: /bin/bash /launch_tyr.sh
-    volumes:
-      - ./tyr_settings.py:/srv/navitia/run/tyr_settings.py
-      - ./launch_tyr.sh:/launch_tyr.sh
+  tyr_worker:
+    build: ./tyr_worker
     links:
       - database
       - rabbitmq
+  
+  tyr_beat:
+    build: ./tyr_beat
+    links:
+      - database
+      - rabbitmq
+
+  tyr_web:
+    build: ./tyr_web
+    links:
+      - database
+

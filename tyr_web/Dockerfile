@@ -1,7 +1,6 @@
 FROM python:2.7-alpine
 
 
-
 RUN apk --update add \
         git \
         postgresql-dev \
@@ -9,11 +8,10 @@ RUN apk --update add \
         && \
     git clone https://github.com/CanalTP/navitia /srv/navitia 
 
-WORKDIR /srv/navitia/source/jormungandr/
-
+WORKDIR /srv/navitia/source/tyr/
 
 RUN apk --update add \
-        g++ \
+        musl-dev \
         python-dev
 
 RUN pip install --no-cache-dir -r requirements.txt
@@ -41,4 +39,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 #        libmemcached-dev && \
 #    rm -rf /var/apk/cache/*
 
-CMD 'python "/jormungandr/manage.py" runserver -r -t 0.0.0.0 -p 80' 
+CMD 'python "/tyr/manage_tyr.py" runserver -r -t 0.0.0.0 -p 80' 
+
