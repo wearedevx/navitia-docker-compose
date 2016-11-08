@@ -13,6 +13,6 @@ RUN dpkg -i \
     || apt install --fix-broken -y
 
 RUN apt install -y python-pip && \
-    pip install -f /usr/share/tyr/requirements.txt
+    pip install -r /usr/share/tyr/requirements.txt
 
 CMD celery worker -A tyr.tasks
