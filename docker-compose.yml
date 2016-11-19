@@ -11,6 +11,9 @@ services:
   rabbitmq:
     image: rabbitmq:management
 
+  redis:
+    image: redis:3-alpine
+
   kraken_default:
     build: ./kraken
     volumes:
@@ -32,7 +35,7 @@ services:
     links:
       - database
       - rabbitmq
-  
+
   tyr_beat:
     build: ./tyr_beat
     links:
@@ -43,4 +46,5 @@ services:
     build: ./tyr_web
     links:
       - database
-
+    ports:
+      - '80'

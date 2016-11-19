@@ -9,6 +9,6 @@ RUN apt update \
 RUN dpkg -i /tmp/navitia_dpkg/archive/navitia-kraken_*.deb \
     || apt install --fix-broken -y
 
-COPY kraken.ini /srv/navitia/bin/
+COPY kraken.ini /srv/navitia/
 
-CMD /srv/navitia/bin/kraken
+CMD /usr/bin/kraken /srv/navitia/kraken.ini

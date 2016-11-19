@@ -24,31 +24,8 @@ RUN cd ../navitia-proto && protoc --python_out=/srv/navitia/source/navitiacommon
 RUN apk --update add \
         musl-dev \
         python-dev
+        RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
-# those are needed for uwsgi
-#RUN apk --update add \
-#        g++ \
-#        build-base \
-#        python-dev \
-#        zlib-dev \
-#        linux-headers \
-#        musl \
-#        musl-dev \
-#        memcached \
-#        libmemcached-dev && \
-#    pip install --no-cache-dir -r requirements.txt && \
-#    apk del \
-#        g++ \
-#        build-base \
-#        python-dev \
-#        zlib-dev \
-#        linux-headers \
-#        musl \
-#        musl-dev \
-#        memcached \
-#        libmemcached-dev && \
-#    rm -rf /var/apk/cache/*
+COPY settings.py /srv/navitia
 
-CMD PYTHONPATH=.:../navitiacommon python ./manage_tyr.py runserver -r -t 0.0.0.0 -p 80
-
+CMD TYR_CONFIG_FILE=/srv/navitia/settings.py PYTHONPATH=.:../navitiacommon python ./manage_tyr.py runserver -r -t 0.0.0.0 -p 80
