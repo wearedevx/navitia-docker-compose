@@ -11,6 +11,7 @@ tyr_config() {
 jormungandr_config() {
   instance_name=$1
 
+  INSTANCE=$instance_name envsubst < templates/jormun_instance.json > /etc/jormungandr.d/$instance_name.json
 }
 
 db_config() {

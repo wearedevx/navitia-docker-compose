@@ -1,0 +1,4 @@
+{
+  "key": "$INSTANCE",
+  "zmq_socket": "tcp://kraken-$INSTANCE:30000"
+}

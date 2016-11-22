@@ -23,21 +23,25 @@ services:
   redis:
     image: redis:3-alpine
 
-  kraken_default:
+  kraken-default:
     build: ./kraken
     volumes_from:
       - tyr_beat:ro
     links:
       - rabbitmq
+    expose:
+      - "30000"
 
   jormungandr:
     build: ./jormungandr
     volumes:
       - jormungandr_instance_conf:/etc/jormungandr.d
     links:
-      - kraken_default
+      - kraken-default
       - rabbitmq
       - database
+    ports:
+      - "9090:80"
 
   tyr_worker:
     build: ./tyr_worker
@@ -66,7 +70,7 @@ services:
     links:
       - database
     ports:
-      - '80:9898'
+      - '9898:80'
 
 volumes:
   tyr_data:
