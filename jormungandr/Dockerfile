@@ -31,4 +31,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # TODO hangle this __version better
 RUN echo "__version__ = 'unkown_version'" > jormungandr/_version.py
 
-CMD PYTHONPATH=.:../navitiacommon python "jormungandr/manage.py" runserver -r -t 0.0.0.0 -p 80
+COPY settings.py /srv/navitia
+
+CMD JORMUNGANDR_CONFIG_FILE=/srv/navitia/settings.py PYTHONPATH=.:../navitiacommon python "jormungandr/manage.py" runserver -r -t 0.0.0.0 -p 80
