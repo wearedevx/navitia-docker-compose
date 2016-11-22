@@ -1,6 +1,15 @@
 version: '2'
 
 services:
+  instances_configurator:
+    build: ./instances_configurator
+    volumes_from:
+      - tyr_beat
+      - tyr_worker
+      - jormungandr
+    links:
+      - database
+
   database:
     environment:
       - POSTGRES_USER=navitia
@@ -16,15 +25,15 @@ services:
 
   kraken_default:
     build: ./kraken
-    volumes:
-      - ./data/default:/srv/data
     volumes_from:
-      - tyr_worker:ro
+      - tyr_beat:ro
     links:
       - rabbitmq
 
   jormungandr:
     build: ./jormungandr
+    volumes:
+      - jormungandr_instance_conf:/etc/jormungandr.d
     links:
       - kraken_default
       - rabbitmq
@@ -32,19 +41,38 @@ services:
 
   tyr_worker:
     build: ./tyr_worker
+    volumes:
+      # TODO this is not necessary, it's just by convenience, remove this to import it directly in instances_configurator
+      - ed_migration:/usr/share/navitia/ed
+    volumes_from:
+      - tyr_beat
     links:
       - database
       - rabbitmq
 
   tyr_beat:
     build: ./tyr_beat
+    volumes:
+      - tyr_data:/srv/ed
+      - tyr_instance_conf:/etc/tyr.d
     links:
       - database
       - rabbitmq
 
   tyr_web:
     build: ./tyr_web
+    volumes_from:
+      - tyr_beat
     links:
       - database
     ports:
-      - '80'
+      - '80:9898'
+
+volumes:
+  tyr_data:
+
+  tyr_instance_conf:
+
+  jormungandr_instance_conf:
+
+  ed_migration:
