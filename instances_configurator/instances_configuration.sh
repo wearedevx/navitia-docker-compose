@@ -5,6 +5,7 @@ tyr_config() {
   INSTANCE=$instance_name envsubst < templates/tyr_instance.ini > /etc/tyr.d/$instance_name.ini
 
   mkdir -p /srv/ed/$instance_name
+  mkdir -p /srv/ed/output
 }
 
 jormungandr_config() {
