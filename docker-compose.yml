@@ -7,8 +7,6 @@ services:
       - tyr_beat
       - tyr_worker
       - jormungandr
-    links:
-      - database
 
   database:
     environment:
@@ -27,8 +25,6 @@ services:
     build: ./kraken
     volumes_from:
       - tyr_beat:ro
-    links:
-      - rabbitmq
     expose:
       - "30000"
 
@@ -36,10 +32,6 @@ services:
     build: ./jormungandr
     volumes:
       - jormungandr_instance_conf:/etc/jormungandr.d
-    links:
-      - kraken-default
-      - rabbitmq
-      - database
     ports:
       - "9090:80"
 
@@ -50,25 +42,17 @@ services:
       - ed_migration:/usr/share/navitia/ed
     volumes_from:
       - tyr_beat
-    links:
-      - database
-      - rabbitmq
 
   tyr_beat:
     build: ./tyr_beat
     volumes:
       - tyr_data:/srv/ed
       - tyr_instance_conf:/etc/tyr.d
-    links:
-      - database
-      - rabbitmq
 
   tyr_web:
     build: ./tyr_web
     volumes_from:
       - tyr_beat
-    links:
-      - database
     ports:
       - '9898:80'
 
