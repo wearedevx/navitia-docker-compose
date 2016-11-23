@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-RUN apk --update add \
+RUN apk --update --no-cache add \
         bash \
         gettext \
         py-pip \
@@ -27,4 +27,3 @@ COPY instances_configuration.sh /
 COPY templates/* /templates/
 
 CMD sh -x /instances_configuration.sh
-

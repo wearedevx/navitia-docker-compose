@@ -5,7 +5,7 @@ RUN sed -i -e 's/v3\../edge/g' /etc/apk/repositories \
     && echo http://dl-3.alpinelinux.org/alpine/edge/testing  >> /etc/apk/repositories \
     && apk upgrade --update-cache --available
 
-RUN apk --update add \
+RUN apk --update --no-cache add \
         git \
         postgresql-dev \
         gcc \
