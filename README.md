@@ -11,7 +11,7 @@ run them all
 `docker-compose up`
 
 you can then add some data:
-`docker cp data/dump_ntfs.zip nav2dockercompose_tyr_beat_1:/srv/ed/input/default/`
+`docker cp data/dumb_ntfs.zip nav2dockercompose_tyr_beat_1:/srv/ed/input/default/`
 
 then you can query jormungandr:
 `http :9090/v1/coverage/default/lines`
