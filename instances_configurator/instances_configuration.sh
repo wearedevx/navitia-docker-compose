@@ -8,6 +8,12 @@ tyr_config() {
   mkdir -p /srv/ed/output
 }
 
+kraken_config() {
+  instance_name=$1
+  mkdir -p /srv/kraken
+  INSTANCE=$instance_name envsubst < templates/kraken_instance.ini > /srv/kraken/$instance_name.ini
+}
+
 jormungandr_config() {
   instance_name=$1
 
@@ -29,7 +35,7 @@ db_config() {
 
   # database schema migration
   alembic_file=/srv/ed/$instance_name/ed_migration.ini
-  INSTANCE=$instance_name envsubst < templates/ed_migration.ini > $alembic_file 
+  INSTANCE=$instance_name envsubst < templates/ed_migration.ini > $alembic_file
   alembic -c $alembic_file upgrade head
 }
 
@@ -38,6 +44,9 @@ add_instance() {
 
   # tyr configuration
   tyr_config $instance_name
+
+  # kraken configuration
+  kraken_config $instance_name
 
   # jormungandr configuration
   jormungandr_config $instance_name

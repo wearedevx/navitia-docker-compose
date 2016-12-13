@@ -7,6 +7,7 @@ services:
       - tyr_beat
       - tyr_worker
       - jormungandr
+      - kraken-default
 
   database:
     environment:
@@ -22,21 +23,28 @@ services:
     image: redis:3-alpine
 
   kraken-default:
-    build: ./kraken
+    image: kraken
+    command: sh -c "while [ ! -f /srv/kraken/default.ini ]; do echo "waiting" && sleep 1; done && ./kraken /srv/kraken/default.ini"
+    volumes:
+      - kraken_instance_conf:/srv/kraken
+
+    #build: ./kraken
     volumes_from:
       - tyr_beat:ro
     expose:
       - "30000"
 
   jormungandr:
-    build: ./jormungandr
+    #build: ./jormungandr
+    image: jormungandr
     volumes:
       - jormungandr_instance_conf:/etc/jormungandr.d
     ports:
-      - "9090:80"
+      - "9191:80"
 
   tyr_worker:
-    build: ./tyr_worker
+    #build: ./tyr_worker
+    image: tyr
     volumes:
       # TODO this is not necessary, it's just by convenience, remove this to import it directly in instances_configurator
       - ed_migration:/usr/share/navitia/ed
@@ -58,9 +66,7 @@ services:
 
 volumes:
   tyr_data:
-
   tyr_instance_conf:
-
   jormungandr_instance_conf:
-
+  kraken_instance_conf:
   ed_migration:
