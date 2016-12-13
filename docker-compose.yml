@@ -7,7 +7,8 @@ services:
       - tyr_beat
       - tyr_worker
       - jormungandr
-      - kraken-default
+    volumes:
+        - kraken_instance_conf:/srv/kraken
 
   database:
     environment:
@@ -44,7 +45,7 @@ services:
 
   tyr_worker:
     #build: ./tyr_worker
-    image: tyr
+    image: tyr-worker
     volumes:
       # TODO this is not necessary, it's just by convenience, remove this to import it directly in instances_configurator
       - ed_migration:/usr/share/navitia/ed
@@ -52,13 +53,13 @@ services:
       - tyr_beat
 
   tyr_beat:
-    build: ./tyr_beat
+    image: tyr-beat
     volumes:
       - tyr_data:/srv/ed
       - tyr_instance_conf:/etc/tyr.d
 
   tyr_web:
-    build: ./tyr_web
+    image: tyr-web
     volumes_from:
       - tyr_beat
     ports:

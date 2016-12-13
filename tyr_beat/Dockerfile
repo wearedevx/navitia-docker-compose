@@ -23,9 +23,9 @@ RUN cd ../navitia-proto && protoc --python_out=/srv/navitia/source/navitiacommon
 
 RUN apk --update --no-cache add \
         musl-dev \
-        python-dev
-
-RUN pip install --no-cache-dir -r requirements.txt
+        python-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apk del python-dev
 
 COPY settings.py /srv/navitia
 
