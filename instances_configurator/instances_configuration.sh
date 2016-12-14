@@ -6,6 +6,7 @@ tyr_config() {
 
   mkdir -p /srv/ed/$instance_name
   mkdir -p /srv/ed/output
+  mkdir -p /srv/ed/input/$instance_name
 }
 
 kraken_config() {
