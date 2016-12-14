@@ -1,0 +1,33 @@
+FROM alpine:edge
+
+WORKDIR /usr/src/app
+COPY source/tyr/requirements.txt /usr/src/app
+COPY source/tyr/tyr /usr/src/app/tyr
+COPY source/tyr/manage_tyr.py /usr/src/app/
+COPY source/tyr/migrations /usr/src/app/migrations
+COPY source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
+
+# we need geos and for the moment it's only on edge
+RUN echo http://dl-3.alpinelinux.org/alpine/edge/testing  >> /etc/apk/repositories
+
+RUN apk --update --no-cache add \
+        git \
+        python-dev \
+        py2-pip \
+        postgresql-dev \
+        gcc \
+        geos \
+        protobuf \
+        musl-dev \
+        python-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apk del \
+            python-dev \
+            git \
+            gcc
+
+COPY tyr_settings.py /srv/navitia/settings.py
+
+COPY run_tyr_beat.sh /
+
+CMD sh /run_tyr_beat.sh

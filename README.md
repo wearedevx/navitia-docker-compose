@@ -16,10 +16,13 @@ you can then add some data:
 then you can query jormungandr:
 `http :9090/v1/coverage/default/lines`
 
+*Note:*
+
+For the moment the navitia' images are not yet pushed into dockerhub, so you need to build the images in builder/
+cf the builder's readme
 
 # TODO
-- move into navitia's repo and use the local sources
-  - compile kraken & ed
-  - push container on docker hub
-  - add the possibility for some container to use the local code (first jormungandr)
+- push container on docker hub
+- add the possibility for some containers to use the local code (first jormungandr)
 - make it easy to add more kraken instances
+- move the tyr and kraken images to alpine :wink:
