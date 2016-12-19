@@ -13,8 +13,6 @@ WORKDIR navitia
 RUN sed -i 's,git\@github.com:\([^/]*\)/\(.*\).git,https://github.com/\1/\2,' .gitmodules
 RUN git submodule update --init
 
-RUN cmake -DCMAKE_BUILD_TYPE=Release source && make -j$(nproc) kraken ed_executables
-
 RUN apt-get install -y apt-transport-https ca-certificates
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 RUN echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list
@@ -40,4 +38,6 @@ COPY build.sh build.sh
 COPY run_tyr_beat.sh run_tyr_beat.sh
 COPY tyr_settings.py tyr_settings.py
 
-CMD ./build.sh
+ENTRYPOINT ["./build.sh"]
+CMD ["dev"]
+

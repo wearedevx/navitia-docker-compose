@@ -23,6 +23,7 @@ If you want to use them without the docker compose, you will need some configura
 in the different containers. You will find example for each file in the docker compose
 
 There is a few external dependancies that are require for navitia to work:
+
     - rabbitmq
     - postgresql
     - redis
