@@ -41,5 +41,6 @@ WORKDIR /usr/src/app/
 
 RUN echo "SQLALCHEMY_DATABASE_URI = 'postgresql://navitia:navitia@database/jormungandr'" > /jormun_settings.py
 
-# TODO use uwsgi
-CMD JORMUNGANDR_CONFIG_FILE=/jormun_settings.py PYTHONPATH=. python jormungandr/manage.py runserver -r -t 0.0.0.0 -p 80
+ENV  JORMUNGANDR_CONFIG_FILE=/jormun_settings.py
+ENV PYTHONPATH=.
+CMD uwsgi --mount /=jormungandr:app --http 0.0.0.0:80

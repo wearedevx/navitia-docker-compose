@@ -13,6 +13,10 @@ WORKDIR navitia
 RUN sed -i 's,git\@github.com:\([^/]*\)/\(.*\).git,https://github.com/\1/\2,' .gitmodules
 RUN git submodule update --init
 
+#navitia will be compiled at the build of the image, it's useful for debugging purpose
+ARG BUILD=0
+RUN if [ $BUILD -eq 1 ]; then cmake -DCMAKE_BUILD_TYPE=Release source && make -j$(nproc); fi
+
 RUN apt-get install -y apt-transport-https ca-certificates
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 RUN echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list
