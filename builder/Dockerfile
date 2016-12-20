@@ -1,12 +1,13 @@
 FROM debian:8
 
+
 RUN mkdir build
 WORKDIR build
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y git g++ cmake libboost-all-dev libzmq3-dev libosmpbf-dev libboost-all-dev libpqxx3-dev libgoogle-perftools-dev  libprotobuf-dev libproj-dev protobuf-compiler libgeos-c1 liblog4cplus-dev
 
-RUN git clone --depth=1 --single-branch --branch=dev https://github.com/CanalTP/navitia.git
+RUN git clone --branch=dev https://github.com/CanalTP/navitia.git
 
 WORKDIR navitia
 
@@ -43,5 +44,4 @@ COPY run_tyr_beat.sh run_tyr_beat.sh
 COPY tyr_settings.py tyr_settings.py
 
 ENTRYPOINT ["./build.sh"]
-CMD ["dev"]
 
