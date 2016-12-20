@@ -12,6 +12,8 @@ RUN echo http://dl-3.alpinelinux.org/alpine/edge/testing  >> /etc/apk/repositori
 RUN apk --update --no-cache add \
         git \
         python-dev \
+        build-base \
+        linux-headers \
         py2-pip \
         postgresql-dev \
         gcc \
@@ -19,12 +21,18 @@ RUN apk --update --no-cache add \
         protobuf \
         musl-dev \
         python-dev \
+    && pip install --no-cache-dir -U pip \
     && pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir uwsgi \
     && apk del \
             python-dev \
             git \
+            build-base \
+            linux-headers \
             gcc
 
 COPY tyr_settings.py /srv/navitia/settings.py
 
-CMD TYR_CONFIG_FILE=/srv/navitia/settings.py PYTHONPATH=.:../navitiacommon python ./manage_tyr.py runserver -r -t 0.0.0.0 -p 80
+ENV TYR_CONFIG_FILE=/srv/navitia/settings.py
+ENV PYTHONPATH=.:../navitiacommon
+CMD uwsgi --mount /=tyr:app  --http 0.0.0.0:80
