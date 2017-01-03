@@ -24,7 +24,7 @@ services:
     image: redis:3-alpine
 
   kraken-default:
-    image: kraken
+    image: navitia/kraken:latest
     command: sh -c "while [ ! -f /srv/kraken/default.ini ]; do echo "waiting" && sleep 1; done && ./kraken /srv/kraken/default.ini"
     volumes:
       - kraken_instance_conf:/srv/kraken
@@ -36,16 +36,14 @@ services:
       - "30000"
 
   jormungandr:
-    #build: ./jormungandr
-    image: jormungandr
+    image: navitia/jormungandr:latest
     volumes:
       - jormungandr_instance_conf:/etc/jormungandr.d
     ports:
       - "9191:80"
 
   tyr_worker:
-    #build: ./tyr_worker
-    image: tyr-worker
+    image: navitia/tyr-worker:latest
     volumes:
       # TODO this is not necessary, it's just by convenience, remove this to import it directly in instances_configurator
       - ed_migration:/usr/share/navitia/ed
@@ -53,13 +51,13 @@ services:
       - tyr_beat
 
   tyr_beat:
-    image: tyr-beat
+    image: navitia/tyr-beat:latest
     volumes:
       - tyr_data:/srv/ed
       - tyr_instance_conf:/etc/tyr.d
 
   tyr_web:
-    image: tyr-web
+    image: navitia/tyr-web:latest
     volumes_from:
       - tyr_beat
     ports:
