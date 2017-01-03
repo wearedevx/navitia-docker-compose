@@ -26,11 +26,6 @@ Then you can query jormungandr:
 
 `http :9090/v1/coverage/default/lines`
 
-**Note:**
-
-For the moment the navitia' images are not yet pushed into dockerhub, so you need to build the images in builder/
-cf the builder's readme
-
 # TODO
 - push container on docker hub
 - add the possibility for some containers to use the local code (first jormungandr)
