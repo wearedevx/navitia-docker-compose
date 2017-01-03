@@ -48,4 +48,6 @@ EXPOSE 5000
 COPY tyr_settings.py /
 
 # TODO change the user to remove this ugly C_FORCE_ROOT
-CMD TYR_CONFIG_FILE=/tyr_settings.py C_FORCE_ROOT=1 celery worker -A tyr.tasks
+ENV TYR_CONFIG_FILE=/tyr_settings.py
+ENV C_FORCE_ROOT=1
+CMD ["celery", "worker", "-A", "tyr.tasks"]

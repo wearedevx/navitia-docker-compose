@@ -29,5 +29,6 @@ RUN apk --update --no-cache add \
 COPY tyr_settings.py /srv/navitia/settings.py
 
 COPY run_tyr_beat.sh /
+RUN chmod +x /run_tyr_beat.sh
 
-CMD sh /run_tyr_beat.sh
+CMD ["sh", "/run_tyr_beat.sh"]

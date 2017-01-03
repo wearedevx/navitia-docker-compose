@@ -26,4 +26,4 @@ WORKDIR /srv/kraken
 COPY kraken/kraken kraken
 EXPOSE 30000
 
-CMD ./kraken
+CMD ["./kraken"]
