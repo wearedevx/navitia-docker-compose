@@ -35,4 +35,4 @@ COPY tyr_settings.py /srv/navitia/settings.py
 
 ENV TYR_CONFIG_FILE=/srv/navitia/settings.py
 ENV PYTHONPATH=.:../navitiacommon
-CMD uwsgi --mount /=tyr:app  --http 0.0.0.0:80
+CMD ["uwsgi",  "--mount", "/=tyr:app",  "--http", "0.0.0.0:80"]
