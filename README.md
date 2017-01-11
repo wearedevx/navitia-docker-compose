@@ -18,7 +18,9 @@ The input dir in in `tyr_beat` in `/srv/ed/input/<name_of_the_coverage>`.
 
 The easiest way is to copy the data via docker:
 
-`docker cp data/dumb_ntfs.zip nav2dockercompose_tyr_beat_1:/srv/ed/input/default/`
+`docker cp data/dumb_ntfs.zip navitiadockercompose_tyr_worker_1:/srv/ed/input/default/`
+
+`navitiadockercompose_tyr_worker_1` is the name of the container, it can be different since it's dependant of the directory name.
 
 (or you can change the docker-compose and make a shared volume).
 
