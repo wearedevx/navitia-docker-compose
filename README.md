@@ -27,7 +27,6 @@ Then you can query jormungandr:
 `http :9090/v1/coverage/default/lines`
 
 # TODO
-- push container on docker hub
 - add the possibility for some containers to use the local code (first jormungandr)
 - make it easy to add more kraken instances
 - move the tyr and kraken images to alpine :wink:
