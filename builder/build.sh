@@ -8,6 +8,7 @@ Usage: ${0##*/} [-lr] [-b branch] [-u user] [-p password]
     -r      push images to a registry
     -u      username for authentication on registry
     -p      password for authentication on registry
+    -n      path to navitia
 EOF
 }
 
@@ -29,7 +30,7 @@ user=''
 password=''
 components='jormungandr kraken tyr-beat tyr-worker tyr-web'
 
-while getopts "lrb:u:p:" opt; do
+while getopts "lrb:u:p:n:" opt; do
     case $opt in
         b)
             branch=$OPTARG
@@ -39,6 +40,9 @@ while getopts "lrb:u:p:" opt; do
             ;;
         u)
             user=$OPTARG
+            ;;
+        n)
+            navitia_local_path=$OPTARG
             ;;
         l)
             tag_latest=1
@@ -55,19 +59,29 @@ done
 
 set -e
 
-echo "building branch $branch"
+#build_dir=/build
+navitia_dir=$(pwd)/navitia
 
+if [ "x$navitia_local_path" != "x" ]; then
+    navitia_dir=$navitia_local_path
+    echo "Using navitia local path $navitia_local_path"
+else
+    echo "building branch $branch"
+    pushd $navitia_dir
+    run git pull && git checkout $branch && git submodule update --init
+    popd
+fi
 
-run git pull && git checkout $branch && git submodule update --init
-run cmake -DCMAKE_BUILD_TYPE=Release source
-run make -j$(nproc) kraken ed_executables
+run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
+run make -j$(nproc) kraken ed_executables protobuf_files
 
-git describe
-
+pushd $navitia_dir
 version=$(git describe)
+echo "building version $version"sqp
+popd
 
 for component in $components; do
-    run docker build -t navitia/$component:$version -f  Dockerfile-$component .
+    run docker build -t navitia/$component:$version -f  Dockerfile-$component . 
     if [ $tag_latest -eq 1 ]; then
         docker tag navitia/$component:$version navitia/$component:latest
     fi

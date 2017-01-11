@@ -2,14 +2,14 @@ FROM debian:8
 
 
 RUN mkdir build
-WORKDIR build
+WORKDIR /build
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y git g++ cmake libboost-all-dev libzmq3-dev libosmpbf-dev libboost-all-dev libpqxx3-dev libgoogle-perftools-dev  libprotobuf-dev libproj-dev protobuf-compiler libgeos-c1 liblog4cplus-dev
 
 RUN git clone --branch=dev https://github.com/CanalTP/navitia.git
 
-WORKDIR navitia
+WORKDIR /build/navitia
 
 RUN sed -i 's,git\@github.com:\([^/]*\)/\(.*\).git,https://github.com/\1/\2,' .gitmodules
 RUN git submodule update --init
@@ -17,6 +17,8 @@ RUN git submodule update --init
 #navitia will be compiled at the build of the image, it's useful for debugging purpose
 ARG BUILD=0
 RUN if [ $BUILD -eq 1 ]; then cmake -DCMAKE_BUILD_TYPE=Release source && make -j$(nproc); fi
+
+WORKDIR /build
 
 RUN apt-get install -y apt-transport-https ca-certificates
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
