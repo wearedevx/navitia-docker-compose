@@ -30,7 +30,7 @@ user=''
 password=''
 components='jormungandr kraken tyr-beat tyr-worker tyr-web'
 
-while getopts "lrb:u:p:n:" opt; do
+while getopts "lrnb:u:p:" opt; do
     case $opt in
         b)
             branch=$OPTARG
@@ -42,7 +42,7 @@ while getopts "lrb:u:p:n:" opt; do
             user=$OPTARG
             ;;
         n)
-            navitia_local_path=$OPTARG
+            navitia_local=0
             ;;
         l)
             tag_latest=1
@@ -62,9 +62,8 @@ set -e
 #build_dir=/build
 navitia_dir=$(pwd)/navitia
 
-if [ "x$navitia_local_path" != "x" ]; then
-    navitia_dir=$navitia_local_path
-    echo "Using navitia local path $navitia_local_path"
+if [ $navitia_local -eq 1 ]; then
+    echo "Using navitia local path, no update"
 else
     echo "building branch $branch"
     pushd $navitia_dir
