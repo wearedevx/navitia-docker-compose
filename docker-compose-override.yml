@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+  jormungandr:
+    image: navitia/jormungandr:test
+    
