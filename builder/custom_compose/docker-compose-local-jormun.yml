@@ -1,6 +1,0 @@
-version: '2'
-
-services:
-  jormungandr:
-    volumes:
-      - ${NAVITIA_PATH}/source/jormungandr/jormungandr:/usr/src/app/jormungandr
