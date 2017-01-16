@@ -29,6 +29,7 @@ push=0
 user=''
 password=''
 components='jormungandr kraken tyr-beat tyr-worker tyr-web'
+navitia_local=0
 
 while getopts "lrnb:u:p:" opt; do
     case $opt in

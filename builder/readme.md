@@ -26,7 +26,7 @@ If you want to build the docker on your own sources you can mount your navitia s
 You also need to add the `n` flag to the builder for the script not to update the sources
 
 ```
-docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v {your_path_to_navitia}:/build/navitia navitia-builder -n
+docker run -v /var/run/docker.sock:/var/run/docker.sock -v {your_path_to_navitia}:/build/navitia navitia-builder -n
 ```
 
 those images are available on dockerhub and are used in the docker compose
