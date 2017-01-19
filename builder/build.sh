@@ -8,7 +8,7 @@ Usage: ${0##*/} [-lr] [-b branch] [-u user] [-p password]
     -r      push images to a registry
     -u      username for authentication on registry
     -p      password for authentication on registry
-    -n      path to navitia
+    -n      does not update the sources (if the sources have been provided by volume for example)
 EOF
 }
 
@@ -77,11 +77,11 @@ run make -j$(nproc) kraken ed_executables protobuf_files
 
 pushd $navitia_dir
 version=$(git describe)
-echo "building version $version"sqp
+echo "building version $version"
 popd
 
 for component in $components; do
-    run docker build -t navitia/$component:$version -f  Dockerfile-$component . 
+    run docker build -t navitia/$component:$version -f  Dockerfile-$component .
     if [ $tag_latest -eq 1 ]; then
         docker tag navitia/$component:$version navitia/$component:latest
     fi
