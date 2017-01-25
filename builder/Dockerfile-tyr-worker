@@ -26,11 +26,11 @@ RUN apt-get update && \
 
 WORKDIR /usr/src/app
 
-COPY source/tyr/requirements.txt /usr/src/app
-COPY source/tyr/tyr /usr/src/app/tyr
-COPY source/tyr/manage_tyr.py /usr/src/app/manage_tyr.py
-COPY source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
-COPY source/sql/alembic /usr/share/navitia/ed/alembic
+COPY navitia/source/tyr/requirements.txt /usr/src/app
+COPY navitia/source/tyr/tyr /usr/src/app/tyr
+COPY navitia/source/tyr/manage_tyr.py /usr/src/app/manage_tyr.py
+COPY navitia/source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
+COPY navitia/source/sql/alembic /usr/share/navitia/ed/alembic
 
 COPY ed/fusio2ed /usr/bin/fusio2ed
 COPY ed/ed2nav /usr/bin/ed2nav

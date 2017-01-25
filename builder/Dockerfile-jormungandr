@@ -1,9 +1,9 @@
 FROM navitia/python
 
 WORKDIR /usr/src/app
-COPY source/jormungandr/requirements.txt /usr/src/app
-COPY source/jormungandr/jormungandr /usr/src/app/jormungandr
-COPY source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
+COPY navitia/source/jormungandr/requirements.txt /usr/src/app
+COPY navitia/source/jormungandr/jormungandr /usr/src/app/jormungandr
+COPY navitia/source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
 
 RUN apk --update --no-cache add \
         g++ \
@@ -32,7 +32,7 @@ WORKDIR /usr/src/app/
 
 RUN echo "SQLALCHEMY_DATABASE_URI = 'postgresql://navitia:navitia@database/jormungandr'" > /jormun_settings.py
 
-ENV  JORMUNGANDR_CONFIG_FILE=/jormun_settings.py
+ENV JORMUNGANDR_CONFIG_FILE=/jormun_settings.py
 ENV PYTHONPATH=.
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2

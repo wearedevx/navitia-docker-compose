@@ -8,6 +8,7 @@ Usage: ${0##*/} [-lr] [-b branch] [-u user] [-p password]
     -r      push images to a registry
     -u      username for authentication on registry
     -p      password for authentication on registry
+    -n      does not update the sources (if the sources have been provided by volume for example)
 EOF
 }
 
@@ -28,8 +29,9 @@ push=0
 user=''
 password=''
 components='jormungandr kraken tyr-beat tyr-worker tyr-web'
+navitia_local=0
 
-while getopts "lrb:u:p:" opt; do
+while getopts "lrnb:u:p:" opt; do
     case $opt in
         b)
             branch=$OPTARG
@@ -39,6 +41,9 @@ while getopts "lrb:u:p:" opt; do
             ;;
         u)
             user=$OPTARG
+            ;;
+        n)
+            navitia_local=0
             ;;
         l)
             tag_latest=1
@@ -55,16 +60,25 @@ done
 
 set -e
 
-echo "building branch $branch"
+#build_dir=/build
+navitia_dir=$(pwd)/navitia
 
+if [ $navitia_local -eq 1 ]; then
+    echo "Using navitia local path, no update"
+else
+    echo "building branch $branch"
+    pushd $navitia_dir
+    run git pull && git checkout $branch && git submodule update --init
+    popd
+fi
 
-run git pull && git checkout $branch && git submodule update --init
-run cmake -DCMAKE_BUILD_TYPE=Release source
-run make -j$(nproc) kraken ed_executables
+run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
+run make -j$(nproc) kraken ed_executables protobuf_files
 
-git describe
-
+pushd $navitia_dir
 version=$(git describe)
+echo "building version $version"
+popd
 
 for component in $components; do
     run docker build -t navitia/$component:$version -f  Dockerfile-$component .
