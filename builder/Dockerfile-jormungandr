@@ -11,7 +11,8 @@ RUN apk --update --no-cache add \
         python-dev \
         git \
         geos \
-        postgresql-dev && \
+        postgresql-dev \
+        libpq && \
     pip install --no-cache-dir -r requirements.txt && \
     apk del \
         g++ \
