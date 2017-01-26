@@ -50,4 +50,4 @@ COPY tyr_settings.py /
 # TODO change the user to remove this ugly C_FORCE_ROOT
 ENV TYR_CONFIG_FILE=/tyr_settings.py
 ENV C_FORCE_ROOT=1
-CMD ["celery", "worker", "-A", "tyr.tasks"]
+CMD ["celery", "worker", "-A", "tyr.tasks", "-O", "fair"]

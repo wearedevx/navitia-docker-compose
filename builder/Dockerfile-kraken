@@ -19,11 +19,15 @@ RUN apt-get update && \
                       libboost-serialization1.55.0 \
                       libboost-system1.55.0 \
                       libboost-test1.55.0 \
-                      libboost-thread1.55.0
+                      libboost-thread1.55.0 \
+                      netcat
 
 RUN mkdir -p /srv/kraken
 WORKDIR /srv/kraken
 COPY kraken/kraken kraken
 EXPOSE 30000
+ENV KRAKEN_GENERAL_zmq_socket=tcp://*:30000
+ENV KRAKEN_GENERAL_log_level=INFO
+HEALTHCHECK CMD nc -z localhost 30000 || exit 1
 
 CMD ["./kraken"]

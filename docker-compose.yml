@@ -27,8 +27,6 @@ services:
     image: navitia/kraken:latest
     environment:
         - KRAKEN_GENERAL_instance_name=default
-        - KRAKEN_GENERAL_log_level=DEBUG
-        - KRAKEN_GENERAL_zmq_socket=tcp://*:30000
         - KRAKEN_GENERAL_database=/srv/ed/output/default.nav.lz4
         - KRAKEN_BROKER_host=rabbitmq
     volumes_from:

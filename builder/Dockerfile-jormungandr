@@ -12,7 +12,8 @@ RUN apk --update --no-cache add \
         git \
         geos \
         postgresql-dev \
-        libpq && \
+        libpq \
+        curl && \
     pip install --no-cache-dir -r requirements.txt && \
     apk del \
         g++ \
@@ -27,10 +28,9 @@ RUN apk --update --no-cache add \
 # I don't see a better way, geos try to find libc and fail, so ugly hack to give it
 RUN ln -s /lib/ld-musl-x86_64.so.1 /usr/lib/libc.so
 
-EXPOSE 5000
-
 WORKDIR /usr/src/app/
 
+HEALTHCHECK CMD curl -f http://localhost/v1/coverage || exit 1
 ENV PYTHONPATH=.
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
