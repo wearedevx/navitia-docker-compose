@@ -31,9 +31,6 @@ EXPOSE 5000
 
 WORKDIR /usr/src/app/
 
-RUN echo "SQLALCHEMY_DATABASE_URI = 'postgresql://navitia:navitia@database/jormungandr'" > /jormun_settings.py
-
-ENV JORMUNGANDR_CONFIG_FILE=/jormun_settings.py
 ENV PYTHONPATH=.
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
