@@ -9,18 +9,6 @@ tyr_config() {
   mkdir -p /srv/ed/input/$instance_name
 }
 
-kraken_config() {
-  instance_name=$1
-  mkdir -p /srv/kraken
-  INSTANCE=$instance_name envsubst < templates/kraken_instance.ini > /srv/kraken/$instance_name.ini
-}
-
-jormungandr_config() {
-  instance_name=$1
-
-  INSTANCE=$instance_name envsubst < templates/jormun_instance.json > /etc/jormungandr.d/$instance_name.json
-}
-
 db_config() {
   instance_name=$1
 
@@ -45,12 +33,6 @@ add_instance() {
 
   # tyr configuration
   tyr_config $instance_name
-
-  # kraken configuration
-  kraken_config $instance_name
-
-  # jormungandr configuration
-  jormungandr_config $instance_name
 
   # db creation and migration
   db_config $instance_name
