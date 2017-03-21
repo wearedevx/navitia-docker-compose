@@ -26,7 +26,7 @@ The easiest way is to copy the data via docker:
 
 Then you can query jormungandr:
 
-`http :9090/v1/coverage/default/lines`
+`http :9191/v1/coverage/default/lines`
 
 # TODO
 - make it easy to add more kraken instances
