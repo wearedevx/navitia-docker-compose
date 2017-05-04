@@ -8,7 +8,9 @@ services:
       - tyr_worker
       - jormungandr
     volumes:
-        - kraken_instance_conf:/srv/kraken
+      - kraken_instance_conf:/srv/kraken
+    environment:
+      - INSTANCE_default=
 
   database:
     environment:

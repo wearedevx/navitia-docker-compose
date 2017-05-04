@@ -30,6 +30,7 @@ db_config() {
 
 add_instance() {
   instance_name=$1
+  echo "adding instance $instance_name"
 
   # tyr configuration
   tyr_config $instance_name
@@ -38,5 +39,11 @@ add_instance() {
   db_config $instance_name
 }
 
-# TODO discover the instance automaticaly
-add_instance 'default'
+# to add an instance add an environment variable called INSTANCE_${NAME_OF_THE_INSTANCE}
+instances=$(env | grep "INSTANCE_"  | sed 's/INSTANCE_\(.*\)=.*/\1/')
+
+for i in $instances; do
+  add_instance $i
+done
+
+echo "all instances configured"
