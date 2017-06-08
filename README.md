@@ -26,7 +26,7 @@ The easiest way is to copy the data via docker:
 
 Then you can query jormungandr:
 
-`http :9191/v1/coverage/default/lines`
+http://localhost:9191/v1/coverage/default/lines
 
 # additional instances
 If you need additional instances, you can use the `docker-instances.jinja2` to generate another docker-compose file (if you want to do some shiny service discovery instead of this quick and dirty jinja template, we'll hapilly accept the contribution :wink: )
