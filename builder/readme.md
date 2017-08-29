@@ -11,7 +11,7 @@ First step, build the builder:
 It's possible to compile navitia when building the image, it's mostly useful when testing,
 it allow to not compile at each run so it's faster to run.
 ```
-    docker build -t navitia-builder -build-arg BUILD=1 .
+    docker build -t navitia-builder --build-arg BUILD=1 .
 ```
 
 Then use to build the images, you need to mount your docker's socket into the builder.

@@ -30,6 +30,7 @@ COPY Dockerfile-kraken Dockerfile-kraken
 COPY Dockerfile-tyr-beat Dockerfile-tyr-beat
 COPY Dockerfile-tyr-worker Dockerfile-tyr-worker
 COPY Dockerfile-tyr-web Dockerfile-tyr-web
+COPY Dockerfile-instances-configurator Dockerfile-instances-configurator
 
 RUN echo "**/*.a" > .dockerignore
 RUN echo "**/CMakeFiles/*" >> .dockerignore
@@ -44,6 +45,8 @@ RUN echo "**/test" >> .dockerignore
 COPY build.sh build.sh
 COPY run_tyr_beat.sh run_tyr_beat.sh
 COPY tyr_settings.py tyr_settings.py
+COPY instances_configuration.sh instances_configuration.sh
+COPY templates templates
 
 ENTRYPOINT ["./build.sh"]
 

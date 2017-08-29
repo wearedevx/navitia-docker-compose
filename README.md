@@ -4,10 +4,6 @@ docker compose with micro containers, one for each navitia's service
 # how to use
 You'll need docker and docker-compose (tested with docker v1.12.1 and docker-compose v1.8.1)
 
-Build the images:
-
-`docker-compose build`
-
 run them all
 
 `docker-compose up`

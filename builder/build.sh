@@ -28,7 +28,7 @@ tag_latest=0
 push=0
 user=''
 password=''
-components='jormungandr kraken tyr-beat tyr-worker tyr-web'
+components='jormungandr kraken tyr-beat tyr-worker tyr-web instances-configurator'
 navitia_local=0
 
 while getopts "lrnb:u:p:" opt; do

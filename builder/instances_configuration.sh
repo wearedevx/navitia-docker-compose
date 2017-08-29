@@ -25,6 +25,7 @@ db_config() {
   # database schema migration
   alembic_file=/srv/ed/$instance_name/ed_migration.ini
   INSTANCE=$instance_name envsubst < templates/ed_migration.ini > $alembic_file
+  ls /usr/share/navitia/ed/alembic/versions
   alembic -c $alembic_file upgrade head
 }
 
