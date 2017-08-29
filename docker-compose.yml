@@ -2,10 +2,9 @@ version: '2'
 
 services:
   instances_configurator:
-    build: ./instances_configurator
+    image: navitia/instances-configurator:latest
     volumes_from:
       - tyr_beat
-      - tyr_worker
       - jormungandr
     volumes:
       - kraken_instance_conf:/srv/kraken
@@ -46,9 +45,6 @@ services:
 
   tyr_worker:
     image: navitia/tyr-worker:latest
-    volumes:
-      # TODO this is not necessary, it's just by convenience, remove this to import it directly in instances_configurator
-      - ed_migration:/usr/share/navitia/ed
     volumes_from:
       - tyr_beat
 
@@ -70,4 +66,3 @@ volumes:
   tyr_instance_conf:
   jormungandr_instance_conf:
   kraken_instance_conf:
-  ed_migration:

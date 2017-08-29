@@ -25,5 +25,6 @@ RUN apk --update --no-cache add \
 
 COPY instances_configuration.sh /
 COPY templates/* /templates/
+COPY navitia/source/sql/alembic /usr/share/navitia/ed/alembic
 
 CMD sh -x /instances_configuration.sh
