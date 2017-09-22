@@ -11,6 +11,7 @@ RUN apk --update --no-cache add \
         git \
         python-dev \
         postgresql-dev \
+        postgresql-client \
         gcc \
         geos \
         musl-dev \
