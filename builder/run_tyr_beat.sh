@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # we need to wait for the database to be ready
-until nc -z database 5432
-do
-    echo "waiting for postgres container..."
-    sleep 0.5
+while ! pg_isready --host=database; do
+    echo "waiting for postgres to be ready"
+    sleep 1;
 done
 
 export TYR_CONFIG_FILE=/srv/navitia/settings.py
