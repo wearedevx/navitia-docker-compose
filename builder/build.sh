@@ -68,7 +68,7 @@ if [ $navitia_local -eq 1 ]; then
 else
     echo "building branch $branch"
     pushd $navitia_dir
-    run git pull && git checkout $branch && git submodule update --init
+    run git pull && git checkout $branch && git submodule update --init --recursive
     popd
 fi
 
