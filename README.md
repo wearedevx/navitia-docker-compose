@@ -1,5 +1,8 @@
-# nav2_docker_compose
+# navitia_docker_compose
 docker compose with micro containers, one for each navitia's service
+
+This repository is not actively maintained, and not ready for production use.
+It's currently for testing only, as far as Kisio Digital (ex CanalTP) is concerned.
 
 # how to use
 You'll need docker and docker-compose (tested with docker v1.12.1 and docker-compose v1.8.1)
