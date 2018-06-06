@@ -28,7 +28,7 @@ tag_latest=0
 push=0
 user=''
 password=''
-components='jormungandr kraken tyr-beat tyr-worker tyr-web instances-configurator'
+components='jormungandr kraken tyr-beat tyr-worker tyr-web instances-configurator mock-kraken'
 navitia_local=0
 
 while getopts "lrnb:u:p:" opt; do
@@ -72,8 +72,12 @@ else
     popd
 fi
 
+TARGETS="protobuf_files kraken ed_executables basic_routing_test basic_schedule_test departure_board_test"
+TARGETS="$TARGETS empty_routing_test line_sections_test main_autocomplete_test main_ptref_test main_routing_test"
+TARGETS="$TARGETS main_routing_without_pt_test main_stif_test multiple_schedules null_status_test timezone_cape_verde_test"
+
 run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
-run make -j$(nproc) kraken ed_executables protobuf_files
+run make -j$(nproc) $TARGETS
 
 pushd $navitia_dir
 version=$(git describe)
