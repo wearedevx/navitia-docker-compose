@@ -29,7 +29,7 @@ tag_latest=0
 push=0
 user=''
 password=''
-components='jormungandr kraken tyr-beat tyr-worker tyr-web instances-configurator'
+components='jormungandr kraken tyr-beat tyr-worker tyr-web instances-configurator mock-kraken'
 navitia_local=0
 nb_procs_to_ignore=0
 
@@ -77,10 +77,12 @@ else
     popd
 fi
 
-TARGETS="protobuf_files kraken ed_executables cities"
+TARGETS="protobuf_files kraken ed_executables basic_routing_test basic_schedule_test departure_board_test"
+TARGETS="$TARGETS empty_routing_test line_sections_test main_autocomplete_test main_ptref_test main_routing_test"
+TARGETS="$TARGETS main_routing_without_pt_test main_stif_test multiple_schedules null_status_test timezone_cape_verde_test"
 
-run cmake -DCMAKE_BUILD_TYPE=Release -DSTRIP_SYMBOLS=ON -DSKIP_TESTS=ON $navitia_dir/source
-run make -j$(nproc --ignore=$nb_procs_to_ignore) $TARGETS
+run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
+run make -j$(nproc) $TARGETS
 
 pushd $navitia_dir
 version=$(git describe)
