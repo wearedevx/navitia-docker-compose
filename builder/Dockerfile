@@ -12,7 +12,7 @@ RUN git clone --branch=dev https://github.com/CanalTP/navitia.git
 WORKDIR /build/navitia
 
 RUN sed -i 's,git\@github.com:\([^/]*\)/\(.*\).git,https://github.com/\1/\2,' .gitmodules
-RUN git submodule update --init
+RUN git submodule update --init --recursive
 
 #navitia will be compiled at the build of the image, it's useful for debugging purpose
 ARG BUILD=0
@@ -31,6 +31,7 @@ COPY Dockerfile-tyr-beat Dockerfile-tyr-beat
 COPY Dockerfile-tyr-worker Dockerfile-tyr-worker
 COPY Dockerfile-tyr-web Dockerfile-tyr-web
 COPY Dockerfile-instances-configurator Dockerfile-instances-configurator
+COPY Dockerfile-mock-kraken Dockerfile-mock-kraken
 
 RUN echo "**/*.a" > .dockerignore
 RUN echo "**/CMakeFiles/*" >> .dockerignore
@@ -39,7 +40,6 @@ RUN echo ".git" >> .dockerignore
 RUN echo "**/CMakeFiles" >> .dockerignore
 RUN echo "**/*.cpp" >> .dockerignore
 RUN echo "**/*.h" >> .dockerignore
-RUN echo "**/tests" >> .dockerignore
 RUN echo "**/test" >> .dockerignore
 
 COPY build.sh build.sh
