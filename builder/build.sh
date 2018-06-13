@@ -86,6 +86,7 @@ popd
 
 for component in $components; do
     run docker build -t navitia/$component:$version -f  Dockerfile-$component .
+        docker tag navitia/$component:$version navitia/$component:$branch
     if [ $tag_latest -eq 1 ]; then
         docker tag navitia/$component:$version navitia/$component:latest
     fi
@@ -95,6 +96,7 @@ if [ $push -eq 1 ]; then
     if [ -n $user ]; then docker login -u $user -p $password; fi
     for component in $components; do
         docker push navitia/$component:$version
+        docker push navitia/$component:$branch
     if [ $tag_latest -eq 1 ]; then
         docker push navitia/$component:latest
     fi
