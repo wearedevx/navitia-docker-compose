@@ -90,7 +90,7 @@ echo "building version $version"
 popd
 
 for component in $components; do
-    run docker build --no-cache -t navitia/$component:$version -f  Dockerfile-$component .
+    run docker build -t navitia/$component:$version -f  Dockerfile-$component .
         docker tag navitia/$component:$version navitia/$component:$branch
     if [ $tag_latest -eq 1 ]; then
         docker tag navitia/$component:$version navitia/$component:latest
