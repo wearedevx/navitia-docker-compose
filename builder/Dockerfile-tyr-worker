@@ -44,14 +44,6 @@ COPY ed/gtfs2ed /usr/bin/gtfs2ed
 COPY ed/geopal2ed /usr/bin/geopal2ed
 COPY cities/cities /usr/bin/cities
 
-# install mimir packages
-RUN wget --quiet $MIMIR_PKG_URL -O /tmp/mimir_pkg.zip && \
-    unzip /tmp/mimir_pkg.zip -d /tmp && \
-    dpkg -i /tmp/archive/mimirsbrunn*.deb && \
-    wget --quiet $COSMOGONY2CITIES_PKG_URL -O /tmp/cosmo2cities.zip && \
-    unzip /tmp/cosmo2cities.zip -d /tmp && \
-    dpkg -i /tmp/archive/cosmogony2cities*.deb
-
 RUN pip install --upgrade pip && pip install setuptools -U && pip install -r /usr/src/app/requirements.txt
 
 EXPOSE 5000
