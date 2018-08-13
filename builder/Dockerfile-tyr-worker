@@ -39,7 +39,7 @@ COPY ed/fusio2ed /usr/bin/fusio2ed
 COPY ed/poi2ed /usr/bin/poi2ed
 COPY ed/gtfs2ed /usr/bin/gtfs2ed
 COPY ed/geopal2ed /usr/bin/geopal2ed
-#COPY cities/cities /usr/bin/cities
+COPY cities/cities /usr/bin/cities
 
 RUN pip install -r /usr/src/app/requirements.txt
 
