@@ -79,10 +79,12 @@ fi
 
 TARGETS="protobuf_files kraken ed_executables basic_routing_test basic_schedule_test departure_board_test"
 TARGETS="$TARGETS empty_routing_test line_sections_test main_autocomplete_test main_ptref_test main_routing_test"
-TARGETS="$TARGETS main_routing_without_pt_test main_stif_test multiple_schedules null_status_test timezone_cape_verde_test"
+TARGETS="$TARGETS main_routing_without_pt_test main_stif_test multiple_schedules null_status_test timezone_cape_verde_test cities"
 
 run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
 run make -j$(nproc) $TARGETS
+
+strip --strip-unneeded tests/*_test kraken/kraken ed/*2ed cities/cities ed/ed2nav
 
 pushd $navitia_dir
 version=$(git describe)
