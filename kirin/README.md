@@ -5,7 +5,7 @@
 ### How to use
 
 Prerequisites:
-Two Docker images are needed to run the dockre-compose-kirin:
+Two Docker images are needed to run the docker-compose-kirin:
 
 - kirin: see the section [Docker](https://github.com/CanalTP/kirin#docker) in Kirin
 - kirin_configurator: the image can be built using the following command line
