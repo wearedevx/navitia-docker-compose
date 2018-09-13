@@ -5,13 +5,17 @@
 ### How to use
 
 Prerequisites:
-Kirin docker image is needed to run the docker-compose-kirin and pulled from dockerhub by default.
-If you want to use/build a specific version, see the section [Docker](https://github.com/CanalTP/kirin#docker) in Kirin.
+Two Docker images are needed to run the dockre-compose-kirin:
 
-When running the Navitia *docker-compose*, add the *docker-compose_kirin* file in the command:
-	`docker-compose -f docker-compose.yml -f kirin/docker-compose_kirin.yml up`
+- kirin: see the section [Docker](https://github.com/CanalTP/kirin#docker) in Kirin
+- kirin_configurator: the image can be built using the following command line
+  `docker build -f Dockerfile-kirin-configurator -t kirin_configurator .`
+
+When running the Navitia _docker-compose_, add the _docker-compose_kirin_ file in the command:
+`docker-compose -f docker-compose.yml -f kirin/docker-compose_kirin.yml up`
 
 This will add the containers needed for Kirin to run and be linked to Navita:
+
 - kirin: the Kirin web server
 - kirin_database: the Kirin database, obviously
 - kirin_background: a script to load the realtime updates already in the database
