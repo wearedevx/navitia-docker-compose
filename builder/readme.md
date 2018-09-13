@@ -1,4 +1,4 @@
-This project aim at building a set of docker images for navitia.
+This project aims at building a set of docker images for navitia.
 The end result will be three images for jormungandr, kraken and tyr
 
 We use a temporary docker image to build the other images because we want to reduce the time to build and the size of the images.
