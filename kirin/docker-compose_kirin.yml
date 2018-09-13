@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+
+  kirin:
+    image: kirin:latest
+    restart: always
+    env_file: kirin/kirin.env 
+    environment:
+      KIRIN_USE_GEVENT: 'true'
+    volumes:
+      - kirin_app:/usr/src/app
+    ports:
+     - "9090:9090"
+
+  kirin_background:
+    image: kirin:latest
+    restart: always
+    command: python ./manage.py load_realtime
+    env_file: kirin/kirin.env
+    environment:
+      KIRIN_USE_GEVENT: 'true'
+
+  kirin_database:
+    image: mdillon/postgis:9.5
+    environment:
+      - POSTGRES_USER=navitia
+      - POSTGRES_PASSWORD=navitia
+      - POSTGRES_DB=kirin
+
+  kirin_configurator:
+    image: kirin_configurator:latest
+    working_dir: /usr/src/app
+    depends_on:
+      - "kirin_database"
+    environment:
+      - KIRIN_SQLALCHEMY_DATABASE_URI=postgresql://navitia:navitia@kirin_database/kirin
+    volumes_from:
+      - kirin
+
+  rabbitmq_kirin:
+    image: rabbitmq:management
+
+volumes:
+  kirin_app:
