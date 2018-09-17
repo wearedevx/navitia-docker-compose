@@ -5,12 +5,14 @@ COPY navitia/source/jormungandr/requirements.txt /usr/src/app
 COPY navitia/source/jormungandr/jormungandr /usr/src/app/jormungandr
 COPY navitia/source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
 
+RUN echo @testing http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+
 RUN apk --update --no-cache add \
         g++ \
         build-base \
         python-dev \
         git \
-        geos \
+        geos@testing \
         postgresql-dev \
         libxslt \
         libxml2-dev \
@@ -18,12 +20,11 @@ RUN apk --update --no-cache add \
         libpq \
         curl && \
     pip install --no-cache-dir -r requirements.txt && \
-    apk del \
+    apk --no-cache del \
         g++ \
         build-base \
         python-dev \
         zlib-dev \
-        musl \
         musl-dev \
         postgresql-dev \
         libxml2-dev \
