@@ -16,7 +16,7 @@ services:
       - POSTGRES_USER=navitia
       - POSTGRES_PASSWORD=navitia
       - POSTGRES_DB=jormungandr
-    image: mdillon/postgis:9.1
+    image: mdillon/postgis:9.5
 
   rabbitmq:
     image: rabbitmq:management
