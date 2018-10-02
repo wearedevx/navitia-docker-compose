@@ -35,7 +35,6 @@ COPY navitia/source/sql/alembic /usr/share/navitia/ed/alembic
 COPY ed/fusio2ed /usr/bin/fusio2ed
 COPY ed/ed2nav /usr/bin/ed2nav
 COPY ed/osm2ed /usr/bin/osm2ed
-COPY ed/fusio2ed /usr/bin/fusio2ed
 COPY ed/poi2ed /usr/bin/poi2ed
 COPY ed/gtfs2ed /usr/bin/gtfs2ed
 COPY ed/geopal2ed /usr/bin/geopal2ed
