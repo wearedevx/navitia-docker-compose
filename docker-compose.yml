@@ -2,7 +2,7 @@ version: '2'
 
 services:
   instances_configurator:
-    image: navitia/instances-configurator:dev
+    image: navitia/instances-configurator:latest
     volumes_from:
       - tyr_beat
       - jormungandr
@@ -25,7 +25,7 @@ services:
     image: redis:3-alpine
 
   kraken-default:
-    image: navitia/kraken:dev
+    image: navitia/kraken:latest
     environment:
         - KRAKEN_GENERAL_instance_name=default
         - KRAKEN_GENERAL_database=/srv/ed/output/default.nav.lz4
@@ -36,7 +36,7 @@ services:
       - "30000"
 
   jormungandr:
-    image: navitia/jormungandr:dev
+    image: navitia/jormungandr:latest
     environment:
       - JORMUNGANDR_SQLALCHEMY_DATABASE_URI=postgresql://navitia:navitia@database/jormungandr
       - JORMUNGANDR_INSTANCE_DEFAULT={"key":"default","zmq_socket":"tcp://kraken-default:30000"}
@@ -44,7 +44,7 @@ services:
       - "9191:80"
 
   tyr_worker:
-    image: navitia/tyr-worker:dev
+    image: navitia/tyr-worker:latest
     volumes_from:
       - tyr_beat
     environment:
@@ -52,13 +52,13 @@ services:
       - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
 
   tyr_beat:
-    image: navitia/tyr-beat:dev
+    image: navitia/tyr-beat:latest
     volumes:
       - tyr_data:/srv/ed
       - tyr_instance_conf:/etc/tyr.d
 
   tyr_web:
-    image: navitia/tyr-web:dev
+    image: navitia/tyr-web:latest
     volumes_from:
       - tyr_beat
     ports:
