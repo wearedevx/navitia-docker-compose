@@ -40,6 +40,25 @@ add_instance() {
   db_config $instance_name
 }
 
+
+upgrade_cities_db() {
+  # Prepare the upgrade file for the cities db in the docker-compose
+  cd /usr/share/navitia/cities
+  sed -i 's/dev/alembic/g' alembic.ini
+  sed -i 's/localhost/cities_database/g' alembic.ini
+
+  # Wait for cities db ready
+  while ! pg_isready --host=cities_database; do
+    echo "waiting for cities_database to be ready"
+    sleep 1;
+  done
+
+  # Perform the upgrade
+  PYTHONPATH=. alembic -c alembic.ini upgrade head
+
+  echo "cities db upgraded"
+}
+
 # to add an instance add an environment variable called INSTANCE_${NAME_OF_THE_INSTANCE}
 instances=$(env | grep "INSTANCE_"  | sed 's/INSTANCE_\(.*\)=.*/\1/')
 
@@ -48,3 +67,9 @@ for i in $instances; do
 done
 
 echo "all instances configured"
+
+upgrade_cities_db
+
+
+
+  
