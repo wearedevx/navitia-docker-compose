@@ -1,13 +1,12 @@
-version: '2'
+version: "2"
 
 services:
-
   kraken-corr-02:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=corr-02
-        - KRAKEN_GENERAL_database=/srv/ed/output/corr-02.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=corr-02
+      - KRAKEN_GENERAL_database=/srv/ed/output/corr-02.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -16,9 +15,9 @@ services:
   kraken-airport-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=airport-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/airport-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=airport-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/airport-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -27,9 +26,9 @@ services:
   kraken-prolong-mano:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=prolong-mano
-        - KRAKEN_GENERAL_database=/srv/ed/output/prolong-mano.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=prolong-mano
+      - KRAKEN_GENERAL_database=/srv/ed/output/prolong-mano.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -38,9 +37,9 @@ services:
   kraken-bibus:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=bibus
-        - KRAKEN_GENERAL_database=/srv/ed/output/bibus.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=bibus
+      - KRAKEN_GENERAL_database=/srv/ed/output/bibus.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -49,9 +48,9 @@ services:
   kraken-mission:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=mission
-        - KRAKEN_GENERAL_database=/srv/ed/output/mission.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=mission
+      - KRAKEN_GENERAL_database=/srv/ed/output/mission.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -60,9 +59,9 @@ services:
   kraken-test-02:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=test-02
-        - KRAKEN_GENERAL_database=/srv/ed/output/test-02.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=test-02
+      - KRAKEN_GENERAL_database=/srv/ed/output/test-02.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -71,9 +70,9 @@ services:
   kraken-sherbrooke:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=sherbrooke
-        - KRAKEN_GENERAL_database=/srv/ed/output/sherbrooke.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=sherbrooke
+      - KRAKEN_GENERAL_database=/srv/ed/output/sherbrooke.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -82,9 +81,9 @@ services:
   kraken-stif:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=stif
-        - KRAKEN_GENERAL_database=/srv/ed/output/stif.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=stif
+      - KRAKEN_GENERAL_database=/srv/ed/output/stif.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -93,9 +92,9 @@ services:
   kraken-test-03:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=test-03
-        - KRAKEN_GENERAL_database=/srv/ed/output/test-03.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=test-03
+      - KRAKEN_GENERAL_database=/srv/ed/output/test-03.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -104,9 +103,9 @@ services:
   kraken-nb-corr-05:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=nb-corr-05
-        - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-05.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=nb-corr-05
+      - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-05.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -115,9 +114,9 @@ services:
   kraken-rebroussement:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=rebroussement
-        - KRAKEN_GENERAL_database=/srv/ed/output/rebroussement.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=rebroussement
+      - KRAKEN_GENERAL_database=/srv/ed/output/rebroussement.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -126,9 +125,9 @@ services:
   kraken-map:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=map
-        - KRAKEN_GENERAL_database=/srv/ed/output/map.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=map
+      - KRAKEN_GENERAL_database=/srv/ed/output/map.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -137,9 +136,9 @@ services:
   kraken-nb-corr-04:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=nb-corr-04
-        - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-04.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=nb-corr-04
+      - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-04.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -148,9 +147,9 @@ services:
   kraken-freqgtfs:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=freqgtfs
-        - KRAKEN_GENERAL_database=/srv/ed/output/freqgtfs.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=freqgtfs
+      - KRAKEN_GENERAL_database=/srv/ed/output/freqgtfs.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -159,9 +158,9 @@ services:
   kraken-corr-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=corr-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/corr-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=corr-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/corr-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -170,9 +169,9 @@ services:
   kraken-passe-minuit-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=passe-minuit-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/passe-minuit-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=passe-minuit-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/passe-minuit-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -181,17 +180,17 @@ services:
   kraken-guichet-unique:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=guichet-unique
-        - KRAKEN_GENERAL_database=/srv/ed/output/guichet-unique.nav.lz4
-        - KRAKEN_GENERAL_is_realtime_enabled=true
-        - KRAKEN_GENERAL_is_realtime_add_enabled=true
-        - KRAKEN_GENERAL_is_realtime_add_trip_enabled=true
-        - KRAKEN_BROKER_host=rabbitmq
-        - KRAKEN_BROKER_port=5672
-        - KRAKEN_BROKER_username=guest
-        - KRAKEN_BROKER_password=guest
-        - KRAKEN_BROKER_exchange=navitia
-        - KRAKEN_BROKER_rt_topics=realtime.cots
+      - KRAKEN_GENERAL_instance_name=guichet-unique
+      - KRAKEN_GENERAL_database=/srv/ed/output/guichet-unique.nav.lz4
+      - KRAKEN_GENERAL_is_realtime_enabled=true
+      - KRAKEN_GENERAL_is_realtime_add_enabled=true
+      - KRAKEN_GENERAL_is_realtime_add_trip_enabled=true
+      - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_BROKER_port=5672
+      - KRAKEN_BROKER_username=guest
+      - KRAKEN_BROKER_password=guest
+      - KRAKEN_BROKER_exchange=navitia
+      - KRAKEN_BROKER_rt_topics=realtime.ire
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -200,9 +199,9 @@ services:
   kraken-freqparis:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=freqparis
-        - KRAKEN_GENERAL_database=/srv/ed/output/freqparis.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=freqparis
+      - KRAKEN_GENERAL_database=/srv/ed/output/freqparis.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -211,9 +210,9 @@ services:
   kraken-itl:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=itl
-        - KRAKEN_GENERAL_database=/srv/ed/output/itl.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=itl
+      - KRAKEN_GENERAL_database=/srv/ed/output/itl.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -222,9 +221,9 @@ services:
   kraken-poitiers:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=poitiers
-        - KRAKEN_GENERAL_database=/srv/ed/output/poitiers.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=poitiers
+      - KRAKEN_GENERAL_database=/srv/ed/output/poitiers.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -233,9 +232,9 @@ services:
   kraken-test-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=test-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/test-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=test-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/test-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -244,9 +243,9 @@ services:
   kraken-boucle-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=boucle-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/boucle-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=boucle-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/boucle-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -255,9 +254,9 @@ services:
   kraken-paysdelaloire:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=paysdelaloire
-        - KRAKEN_GENERAL_database=/srv/ed/output/paysdelaloire.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=paysdelaloire
+      - KRAKEN_GENERAL_database=/srv/ed/output/paysdelaloire.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -266,9 +265,9 @@ services:
   kraken-saintomer:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=saintomer
-        - KRAKEN_GENERAL_database=/srv/ed/output/saintomer.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=saintomer
+      - KRAKEN_GENERAL_database=/srv/ed/output/saintomer.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -277,9 +276,9 @@ services:
   kraken-airport:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=airport
-        - KRAKEN_GENERAL_database=/srv/ed/output/airport.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=airport
+      - KRAKEN_GENERAL_database=/srv/ed/output/airport.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -288,9 +287,9 @@ services:
   kraken-tcl:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=tcl
-        - KRAKEN_GENERAL_database=/srv/ed/output/tcl.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=tcl
+      - KRAKEN_GENERAL_database=/srv/ed/output/tcl.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -299,9 +298,9 @@ services:
   kraken-passe-minuit-02:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=passe-minuit-02
-        - KRAKEN_GENERAL_database=/srv/ed/output/passe-minuit-02.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=passe-minuit-02
+      - KRAKEN_GENERAL_database=/srv/ed/output/passe-minuit-02.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -310,9 +309,9 @@ services:
   kraken-nb-corr-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=nb-corr-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=nb-corr-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -321,9 +320,9 @@ services:
   kraken-mdi:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=mdi
-        - KRAKEN_GENERAL_database=/srv/ed/output/mdi.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=mdi
+      - KRAKEN_GENERAL_database=/srv/ed/output/mdi.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -332,9 +331,9 @@ services:
   kraken-nb-corr-03:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=nb-corr-03
-        - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-03.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=nb-corr-03
+      - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-03.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -343,9 +342,9 @@ services:
   kraken-prolong-auto:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=prolong-auto
-        - KRAKEN_GENERAL_database=/srv/ed/output/prolong-auto.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=prolong-auto
+      - KRAKEN_GENERAL_database=/srv/ed/output/prolong-auto.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -354,9 +353,9 @@ services:
   kraken-nb-corr-02:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=nb-corr-02
-        - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-02.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=nb-corr-02
+      - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-02.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -365,9 +364,9 @@ services:
   kraken-freqsimple:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=freqsimple
-        - KRAKEN_GENERAL_database=/srv/ed/output/freqsimple.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=freqsimple
+      - KRAKEN_GENERAL_database=/srv/ed/output/freqsimple.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -376,9 +375,9 @@ services:
   kraken-freqgtfs-01:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=freqgtfs-01
-        - KRAKEN_GENERAL_database=/srv/ed/output/freqgtfs-01.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=freqgtfs-01
+      - KRAKEN_GENERAL_database=/srv/ed/output/freqgtfs-01.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -387,9 +386,9 @@ services:
   kraken-tad:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=tad
-        - KRAKEN_GENERAL_database=/srv/ed/output/tad.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=tad
+      - KRAKEN_GENERAL_database=/srv/ed/output/tad.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -398,18 +397,16 @@ services:
   kraken-fr-auv:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=fr-auv
-        - KRAKEN_GENERAL_database=/srv/ed/output/fr-auv.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=fr-auv
+      - KRAKEN_GENERAL_database=/srv/ed/output/fr-auv.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
       - "30000"
 
-
   jormungandr:
     environment:
-
       - JORMUNGANDR_INSTANCE_corr-02={"key":"corr-02","zmq_socket":"tcp://kraken-corr-02:30000"}
 
       - JORMUNGANDR_INSTANCE_airport-01={"key":"airport-01","zmq_socket":"tcp://kraken-airport-01:30000"}
@@ -490,10 +487,8 @@ services:
 
       - JORMUNGANDR_CACHE_CONFIGURATION={"CACHE_TYPE":"simple", "CACHE_KEY_PREFIX":"jormungandr.", "TIMEOUT_PTOBJECTS":0.001, "TIMEOUT_AUTHENTICATION":0.001, "TIMEOUT_PARAMS":0.001, "TIMEOUT_TIMEO":60, "TIMEOUT_SYNTHESE":30}
 
-
   instances_configurator:
     environment:
-
       - INSTANCE_corr-02=
 
       - INSTANCE_airport-01=
