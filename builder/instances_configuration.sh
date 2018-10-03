@@ -69,7 +69,3 @@ done
 echo "all instances configured"
 
 upgrade_cities_db
-
-
-
-  
