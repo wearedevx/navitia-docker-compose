@@ -47,6 +47,9 @@ services:
     image: navitia/tyr-worker:latest
     volumes_from:
       - tyr_beat
+    environment:
+      - TYR_CITIES_DATABASE_URI=postgresql://navitia:navitia@cities_database/cities
+      - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
 
   tyr_beat:
     image: navitia/tyr-beat:latest
@@ -60,6 +63,16 @@ services:
       - tyr_beat
     ports:
       - '9898:80'
+    environment:
+      - TYR_CITIES_DATABASE_URI=postgresql://navitia:navitia@cities_database/cities
+      - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
+
+  cities_database:
+    environment:
+      - POSTGRES_USER=navitia
+      - POSTGRES_PASSWORD=navitia
+      - POSTGRES_DB=cities
+    image: mdillon/postgis:9.5 
 
 volumes:
   tyr_data:
