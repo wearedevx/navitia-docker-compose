@@ -43,7 +43,7 @@ while getopts "lrnb:u:p:" opt; do
             user=$OPTARG
             ;;
         n)
-            navitia_local=0
+            navitia_local=1
             ;;
         l)
             tag_latest=1
