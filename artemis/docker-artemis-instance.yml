@@ -133,6 +133,17 @@ services:
     expose:
       - "30000"
 
+  kraken-fr-pdl:
+    image: navitia/kraken:${TAG}
+    environment:
+      - KRAKEN_GENERAL_instance_name=map
+      - KRAKEN_GENERAL_database=/srv/ed/output/map.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
+    volumes_from:
+      - tyr_beat:ro
+    expose:
+      - "30000"
+
   kraken-nb-corr-04:
     image: navitia/kraken:${TAG}
     environment:

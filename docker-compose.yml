@@ -2,7 +2,7 @@ version: "2"
 
 services:
   instances_configurator:
-    image: navitia/instances-configurator:latest
+    image: navitia/instances-configurator:${TAG}
     volumes_from:
       - tyr_beat
       - jormungandr
@@ -64,7 +64,7 @@ services:
     image: redis:3-alpine
 
   kraken-default:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
       - KRAKEN_GENERAL_instance_name=default
       - KRAKEN_GENERAL_database=/srv/ed/output/default.nav.lz4
@@ -77,7 +77,7 @@ services:
       - rabbitmq
 
   jormungandr:
-    image: navitia/jormungandr:latest
+    image: navitia/jormungandr:${TAG}
     environment:
       - JORMUNGANDR_SQLALCHEMY_DATABASE_URI=postgresql://navitia:navitia@database/jormungandr
       - JORMUNGANDR_INSTANCE_DEFAULT={"key":"default","zmq_socket":"tcp://kraken-default:30000"}
@@ -85,7 +85,7 @@ services:
       - "9191:80"
 
   tyr_worker:
-    image: navitia/tyr-worker:latest
+    image: navitia/tyr-worker:${TAG}
     volumes_from:
       - tyr_beat
     environment:
@@ -93,7 +93,7 @@ services:
       - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
 
   tyr_beat:
-    image: navitia/tyr-beat:latest
+    image: navitia/tyr-beat:${TAG}
     volumes:
       - tyr_data:/srv/ed
       - tyr_instance_conf:/etc/tyr.d
@@ -101,7 +101,7 @@ services:
       - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
 
   tyr_web:
-    image: navitia/tyr-web:latest
+    image: navitia/tyr-web:${TAG}
     volumes_from:
       - tyr_beat
     ports:
