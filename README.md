@@ -46,5 +46,10 @@ To add data to a given instance, you'll need to do:
 
 `docker cp data/dumb_ntfs.zip navitiadockercompose_tyr_worker_1:/srv/ed/input/<my_instance>`
 
+# Tweak images
+By default, the tag `:latest` will be used when images are pulled. If you want to use diferent tags, set the `TAG` envar. For instance, to run the `dev` images for development purposes, run:
+
+`TAG=dev docker-compose -f docker-compose.yml -f additional_navitia_instances.yml up`
+
 # TODO
 - move the tyr and kraken images to alpine :wink:
