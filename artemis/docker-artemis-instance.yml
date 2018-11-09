@@ -3,7 +3,7 @@ version: '2'
 services:
 
   kraken-corr-02:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=corr-02
         - KRAKEN_GENERAL_database=/srv/ed/output/corr-02.nav.lz4
@@ -14,7 +14,7 @@ services:
       - "30000"
 
   kraken-airport-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=airport-01
         - KRAKEN_GENERAL_database=/srv/ed/output/airport-01.nav.lz4
@@ -25,7 +25,7 @@ services:
       - "30000"
 
   kraken-prolong-mano:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=prolong-mano
         - KRAKEN_GENERAL_database=/srv/ed/output/prolong-mano.nav.lz4
@@ -36,7 +36,7 @@ services:
       - "30000"
 
   kraken-bibus:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=bibus
         - KRAKEN_GENERAL_database=/srv/ed/output/bibus.nav.lz4
@@ -47,7 +47,7 @@ services:
       - "30000"
 
   kraken-mission:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=mission
         - KRAKEN_GENERAL_database=/srv/ed/output/mission.nav.lz4
@@ -58,7 +58,7 @@ services:
       - "30000"
 
   kraken-test-02:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=test-02
         - KRAKEN_GENERAL_database=/srv/ed/output/test-02.nav.lz4
@@ -69,7 +69,7 @@ services:
       - "30000"
 
   kraken-sherbrooke:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=sherbrooke
         - KRAKEN_GENERAL_database=/srv/ed/output/sherbrooke.nav.lz4
@@ -80,7 +80,7 @@ services:
       - "30000"
 
   kraken-stif:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=stif
         - KRAKEN_GENERAL_database=/srv/ed/output/stif.nav.lz4
@@ -91,7 +91,7 @@ services:
       - "30000"
 
   kraken-test-03:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=test-03
         - KRAKEN_GENERAL_database=/srv/ed/output/test-03.nav.lz4
@@ -102,7 +102,7 @@ services:
       - "30000"
 
   kraken-nb-corr-05:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=nb-corr-05
         - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-05.nav.lz4
@@ -113,7 +113,7 @@ services:
       - "30000"
 
   kraken-rebroussement:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=rebroussement
         - KRAKEN_GENERAL_database=/srv/ed/output/rebroussement.nav.lz4
@@ -124,7 +124,7 @@ services:
       - "30000"
 
   kraken-map:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=map
         - KRAKEN_GENERAL_database=/srv/ed/output/map.nav.lz4
@@ -135,7 +135,7 @@ services:
       - "30000"
 
   kraken-fr-pdl:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=fr-pdl
         - KRAKEN_GENERAL_database=/srv/ed/output/fr-pdl.nav.lz4
@@ -146,7 +146,7 @@ services:
       - "30000"
 
   kraken-nb-corr-04:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=nb-corr-04
         - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-04.nav.lz4
@@ -157,7 +157,7 @@ services:
       - "30000"
 
   kraken-freqgtfs:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=freqgtfs
         - KRAKEN_GENERAL_database=/srv/ed/output/freqgtfs.nav.lz4
@@ -168,7 +168,7 @@ services:
       - "30000"
 
   kraken-corr-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=corr-01
         - KRAKEN_GENERAL_database=/srv/ed/output/corr-01.nav.lz4
@@ -179,7 +179,7 @@ services:
       - "30000"
 
   kraken-passe-minuit-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=passe-minuit-01
         - KRAKEN_GENERAL_database=/srv/ed/output/passe-minuit-01.nav.lz4
@@ -190,7 +190,7 @@ services:
       - "30000"
 
   kraken-guichet-unique:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=guichet-unique
         - KRAKEN_GENERAL_database=/srv/ed/output/guichet-unique.nav.lz4
@@ -206,7 +206,7 @@ services:
       - "30000"
 
   kraken-freqparis:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=freqparis
         - KRAKEN_GENERAL_database=/srv/ed/output/freqparis.nav.lz4
@@ -217,7 +217,7 @@ services:
       - "30000"
 
   kraken-itl:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=itl
         - KRAKEN_GENERAL_database=/srv/ed/output/itl.nav.lz4
@@ -228,7 +228,7 @@ services:
       - "30000"
 
   kraken-poitiers:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=poitiers
         - KRAKEN_GENERAL_database=/srv/ed/output/poitiers.nav.lz4
@@ -239,7 +239,7 @@ services:
       - "30000"
 
   kraken-test-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=test-01
         - KRAKEN_GENERAL_database=/srv/ed/output/test-01.nav.lz4
@@ -250,7 +250,7 @@ services:
       - "30000"
 
   kraken-boucle-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=boucle-01
         - KRAKEN_GENERAL_database=/srv/ed/output/boucle-01.nav.lz4
@@ -261,7 +261,7 @@ services:
       - "30000"
 
   kraken-paysdelaloire:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=paysdelaloire
         - KRAKEN_GENERAL_database=/srv/ed/output/paysdelaloire.nav.lz4
@@ -272,7 +272,7 @@ services:
       - "30000"
 
   kraken-saintomer:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=saintomer
         - KRAKEN_GENERAL_database=/srv/ed/output/saintomer.nav.lz4
@@ -283,7 +283,7 @@ services:
       - "30000"
 
   kraken-airport:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=airport
         - KRAKEN_GENERAL_database=/srv/ed/output/airport.nav.lz4
@@ -294,7 +294,7 @@ services:
       - "30000"
 
   kraken-tcl:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=tcl
         - KRAKEN_GENERAL_database=/srv/ed/output/tcl.nav.lz4
@@ -305,7 +305,7 @@ services:
       - "30000"
 
   kraken-passe-minuit-02:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=passe-minuit-02
         - KRAKEN_GENERAL_database=/srv/ed/output/passe-minuit-02.nav.lz4
@@ -316,7 +316,7 @@ services:
       - "30000"
 
   kraken-nb-corr-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=nb-corr-01
         - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-01.nav.lz4
@@ -327,7 +327,7 @@ services:
       - "30000"
 
   kraken-mdi:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=mdi
         - KRAKEN_GENERAL_database=/srv/ed/output/mdi.nav.lz4
@@ -338,7 +338,7 @@ services:
       - "30000"
 
   kraken-nb-corr-03:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=nb-corr-03
         - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-03.nav.lz4
@@ -349,7 +349,7 @@ services:
       - "30000"
 
   kraken-prolong-auto:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=prolong-auto
         - KRAKEN_GENERAL_database=/srv/ed/output/prolong-auto.nav.lz4
@@ -360,7 +360,7 @@ services:
       - "30000"
 
   kraken-nb-corr-02:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=nb-corr-02
         - KRAKEN_GENERAL_database=/srv/ed/output/nb-corr-02.nav.lz4
@@ -371,7 +371,7 @@ services:
       - "30000"
 
   kraken-freqsimple:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=freqsimple
         - KRAKEN_GENERAL_database=/srv/ed/output/freqsimple.nav.lz4
@@ -382,7 +382,7 @@ services:
       - "30000"
 
   kraken-freqgtfs-01:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=freqgtfs-01
         - KRAKEN_GENERAL_database=/srv/ed/output/freqgtfs-01.nav.lz4
@@ -393,7 +393,7 @@ services:
       - "30000"
 
   kraken-tad:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=tad
         - KRAKEN_GENERAL_database=/srv/ed/output/tad.nav.lz4
@@ -404,7 +404,7 @@ services:
       - "30000"
 
   kraken-fr-auv:
-    image: navitia/kraken:latest
+    image: navitia/kraken:${TAG}
     environment:
         - KRAKEN_GENERAL_instance_name=fr-auv
         - KRAKEN_GENERAL_database=/srv/ed/output/fr-auv.nav.lz4
