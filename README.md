@@ -1,11 +1,11 @@
 # navitia_docker_compose
 
-docker compose with micro containers, one for each navitia's service
+docker-compose with micro containers, one for each navitia's service
 
 This repository is not actively maintained, and not ready for production use.
 It's currently for testing only, as far as Kisio Digital (ex CanalTP) is concerned.
 
-# how to use
+## How to use
 
 You'll need docker and docker-compose (tested with docker v1.12.1 and docker-compose v1.8.1)
 
@@ -15,14 +15,12 @@ You'll need docker and docker-compose (tested with docker v1.12.1 and docker-com
 
 ### Provide data
 
-The most common provided data formats are:
+The more common data format provided are:
 
 - OSM .pbf for street-network data
-- NTFS for Public Transport data (most tested in Navitia)  
-  You can as well provide GTFS directly to Navitia, but it will be deprecated.
-  This will be replaced by using first gtfs2ntfs converter available in
-  [navitia_model](<(https://github.com/CanalTP/navitia_model)>), then providing the
-  NTFS output to navitia.
+- NTFS for Public Transport data (more tested in Navitia)  
+  You can however provide GTFS directly to Navitia, but it will be replaced by use of
+  gtfs2ntfs converter available in [navitia_model](<(https://github.com/CanalTP/navitia_model)>)
 
 You can then add some data in the `default` coverage:
 
@@ -62,12 +60,12 @@ To add data to a given instance, you'll need to do:
 
 `docker cp data/dumb_ntfs.zip navitiadockercompose_tyr_worker_1:/srv/ed/input/<my_instance>`
 
-# Tweak images
+## Tweak images
 
 By default, the tag `:latest` will be used when images are pulled. If you want to use diferent tags, set the `TAG` envar. For instance, to run the `dev` images for development purposes, run:
 
 `TAG=dev docker-compose -f docker-compose.yml -f additional_navitia_instances.yml up`
 
-# TODO
+## TODO
 
 - move the tyr and kraken images to alpine :wink:
