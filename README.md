@@ -15,12 +15,14 @@ You'll need docker and docker-compose (tested with docker v1.12.1 and docker-com
 
 ### Provide data
 
-The more common data format provided are:
+The most common provided data format provided are:
 
 - OSM .pbf for street-network data
-- NTFS for Public Transport data (more tested in Navitia)  
-  You can however provide GTFS directly to Navitia, but it will be replaced by use of
-  gtfs2ntfs converter available in [navitia_model](<(https://github.com/CanalTP/navitia_model)>)
+- NTFS for Public Transport data (most tested in Navitia)  
+  You can as well provide GTFS directly to Navitia, but it will be deprecated.
+  This will be replaced by using first gtfs2ntfs converter available in
+  [navitia_model](<(https://github.com/CanalTP/navitia_model)>), then providing the
+  NTFS output to navitia.
 
 You can then add some data in the `default` coverage:
 
