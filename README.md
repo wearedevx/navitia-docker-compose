@@ -15,7 +15,7 @@ You'll need docker and docker-compose (tested with docker v1.12.1 and docker-com
 
 ### Provide data
 
-The most common provided data format provided are:
+The most common provided data formats are:
 
 - OSM .pbf for street-network data
 - NTFS for Public Transport data (most tested in Navitia)  
