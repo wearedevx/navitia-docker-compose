@@ -16,7 +16,9 @@ services:
   kirin_background:
     image: kirin:latest
     restart: always
-    command: python ./manage.py load_realtime
+    depends_on:
+      - kirin_configurator
+    command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; python ./manage.py load_realtime"
     env_file: kirin/kirin.env
     environment:
       KIRIN_USE_GEVENT: 'true'
