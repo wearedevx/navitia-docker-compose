@@ -40,4 +40,4 @@ HEALTHCHECK CMD curl -f http://localhost/v1/coverage || exit 1
 ENV PYTHONPATH=.
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
-CMD ["uwsgi", "--mount", "/=jormungandr:app", "--http", "0.0.0.0:80"]
+CMD ["uwsgi", "--master", "--lazy-apps", "--mount", "/=jormungandr:app", "--http", "0.0.0.0:80"]
