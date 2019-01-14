@@ -27,9 +27,9 @@ services:
   kraken-default:
     image: navitia/kraken:${TAG}
     environment:
-        - KRAKEN_GENERAL_instance_name=default
-        - KRAKEN_GENERAL_database=/srv/ed/output/default.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
+      - KRAKEN_GENERAL_instance_name=default
+      - KRAKEN_GENERAL_database=/srv/ed/output/default.nav.lz4
+      - KRAKEN_BROKER_host=rabbitmq
     volumes_from:
       - tyr_beat:ro
     expose:
@@ -72,7 +72,7 @@ services:
       - POSTGRES_USER=navitia
       - POSTGRES_PASSWORD=navitia
       - POSTGRES_DB=cities
-    image: mdillon/postgis:9.5 
+    image: mdillon/postgis:9.5
 
 volumes:
   tyr_data:
