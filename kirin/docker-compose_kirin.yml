@@ -2,7 +2,7 @@ version: "2"
 
 services:
   kirin:
-    image: kirin:latest
+    image: kirin:${KIRIN_TAG}
     restart: always
     env_file: kirin/kirin.env
     environment:
@@ -13,7 +13,7 @@ services:
       - "9090:9090"
 
   kirin_background:
-    image: kirin:latest
+    image: kirin:${KIRIN_TAG}
     restart: always
     depends_on:
       - kirin_configurator
@@ -30,7 +30,8 @@ services:
       - POSTGRES_DB=kirin
 
   kirin_configurator:
-    image: kirin_configurator:latest
+    image: kirin_configurator:${KIRIN_TAG}
+    env_file: kirin/kirin.env
     working_dir: /usr/src/app
     depends_on:
       - "kirin_database"
