@@ -199,7 +199,7 @@ services:
         - KRAKEN_BROKER_username=guest
         - KRAKEN_BROKER_password=guest
         - KRAKEN_BROKER_exchange=navitia
-        - KRAKEN_BROKER_rt_topics=realtime.ire
+        - KRAKEN_BROKER_rt_topics=realtime.cots
     volumes_from:
       - tyr_beat:ro
     expose:
