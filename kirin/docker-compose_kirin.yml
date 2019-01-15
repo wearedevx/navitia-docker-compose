@@ -5,8 +5,6 @@ services:
     image: kirin:${KIRIN_TAG}
     restart: always
     env_file: kirin/kirin.env
-    environment:
-      KIRIN_USE_GEVENT: "true"
     volumes:
       - kirin_app:/usr/src/app
     ports:
@@ -19,8 +17,6 @@ services:
       - kirin_configurator
     command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; python ./manage.py load_realtime"
     env_file: kirin/kirin.env
-    environment:
-      KIRIN_USE_GEVENT: "true"
 
   kirin_database:
     image: mdillon/postgis:9.5
@@ -35,8 +31,6 @@ services:
     working_dir: /usr/src/app
     depends_on:
       - "kirin_database"
-    environment:
-      - KIRIN_SQLALCHEMY_DATABASE_URI=postgresql://navitia:navitia@kirin_database/kirin
     volumes_from:
       - kirin
 
