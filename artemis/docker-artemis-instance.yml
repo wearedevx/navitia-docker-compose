@@ -490,12 +490,11 @@ services:
 
       - JORMUNGANDR_INSTANCE_fr-auv={"key":"fr-auv","zmq_socket":"tcp://kraken-fr-auv:30000"}
 
-      # Following config-params are defined on current artemis platform (so for Artemis old-school).
-      # They are not read from env-var currently, so they are just a reminder: it might explain some diffs for Artemis-NG.
-      # - CIRCUIT_BREAKER_MAX_INSTANCE_FAIL=10000
-      # - CIRCUIT_BREAKER_INSTANCE_TIMEOUT_S=1
-      # - INSTANCE_TIMEOUT=30000
+      - CIRCUIT_BREAKER_MAX_INSTANCE_FAIL=10000
+      - CIRCUIT_BREAKER_INSTANCE_TIMEOUT_S=1
+      - INSTANCE_TIMEOUT=30000
 
+      - JORMUNGANDR_USE_SERPY=True
       - JORMUNGANDR_CACHE_CONFIGURATION={"CACHE_TYPE":"simple", "CACHE_KEY_PREFIX":"jormungandr.", "TIMEOUT_PTOBJECTS":0.001, "TIMEOUT_AUTHENTICATION":0.001, "TIMEOUT_PARAMS":0.001, "TIMEOUT_TIMEO":60, "TIMEOUT_SYNTHESE":30}
 
   instances_configurator:
