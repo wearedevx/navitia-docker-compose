@@ -194,12 +194,14 @@ services:
     environment:
         - KRAKEN_GENERAL_instance_name=guichet-unique
         - KRAKEN_GENERAL_database=/srv/ed/output/guichet-unique.nav.lz4
+        - KRAKEN_GENERAL_is_realtime_enabled=true
+        - KRAKEN_GENERAL_is_realtime_add_enabled=true
         - KRAKEN_BROKER_host=rabbitmq
         - KRAKEN_BROKER_port=5672
         - KRAKEN_BROKER_username=guest
         - KRAKEN_BROKER_password=guest
         - KRAKEN_BROKER_exchange=navitia
-        - KRAKEN_BROKER_rt_topics=realtime.ire
+        - KRAKEN_BROKER_rt_topics=realtime.cots
     volumes_from:
       - tyr_beat:ro
     expose:
