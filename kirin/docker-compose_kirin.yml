@@ -25,7 +25,7 @@ services:
       - POSTGRES_PASSWORD=navitia
       - POSTGRES_DB=kirin
     ports:
-     - "15432:5432"
+     - "9494:5432"
 
   kirin_configurator:
     image: kirin_configurator:${KIRIN_TAG}
