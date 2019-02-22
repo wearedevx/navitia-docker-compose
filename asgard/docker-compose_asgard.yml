@@ -2,10 +2,10 @@ version: "2"
 
 services:
   asgard-data:
-    image: navitia/asgard-data:${DATA_TAG}
+    image: navitia/asgard-data:${ASGARD_DATA_TAG}
 
   asgard:
-    image: navitia/asgard-prod:${PROD_TAG}
+    image: navitia/asgard-app:${ASGARD_APP_TAG}
     volumes_from:
       - asgard-data
     ports:
