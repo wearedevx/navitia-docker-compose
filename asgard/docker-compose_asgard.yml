@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  asgard-data:
+    image: navitia/asgard-data:${DATA_TAG}
+  
+  asgard:
+    image: navitia/asgard-prod:${PROD_TAG}
+    volumes_from:
+      - asgard-data
+    ports:
+      - "6000:6000"
