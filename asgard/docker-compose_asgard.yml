@@ -1,14 +1,12 @@
-version: '2'
+version: "2"
 
 services:
   asgard-data:
-    image: navitia/asgard-data:${ASGARD_DATA_TAG}
-  
+    image: navitia/asgard-data:${DATA_TAG}
+
   asgard:
-    image: navitia/asgard-app:${ASGARD_APP_TAG}
+    image: navitia/asgard-prod:${PROD_TAG}
     volumes_from:
       - asgard-data
     ports:
       - "6000:6000"
-      - "8080:8080"
-    restart: always

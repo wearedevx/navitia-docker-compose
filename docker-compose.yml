@@ -76,13 +76,6 @@ services:
     links:
       - rabbitmq
 
-    asgard:
-      image: navitia/asgard-prod:${TAG}
-      volumes_from:
-        - navitia/asgard-data:${TAG}
-      expose:
-        - "6000"
-
   jormungandr:
     image: navitia/jormungandr:${TAG}
     environment:
