@@ -1,6 +1,5 @@
 FROM debian:8
 ENV MIMIR_PKG_URL=https://ci.navitia.io/job/mimirsbrunn_release_package/lastSuccessfulBuild/artifact/*zip*/archive.zip
-ENV COSMOGONY2CITIES_PKG_URL=https://ci.navitia.io/view/mimir/job/cosmogony2cities_deb/lastSuccessfulBuild/artifact/*zip*/archive.zip
 
 RUN apt-get update --fix-missing && \
             apt-get upgrade -y && \
@@ -44,7 +43,12 @@ COPY ed/gtfs2ed /usr/bin/gtfs2ed
 COPY ed/geopal2ed /usr/bin/geopal2ed
 COPY cities/cities /usr/bin/cities
 
-RUN pip install --upgrade pip && pip install setuptools -U && pip install -r /usr/src/app/requirements.txt
+# install mimir packages
+RUN wget $MIMIR_PKG_URL -O /tmp/mimir_pkg.zip && \
+    unzip /tmp/mimir_pkg.zip -d /tmp && \
+    dpkg -i /tmp/archive/mimirsbrunn*.deb
+
+RUN pip install -r /usr/src/app/requirements.txt
 
 EXPOSE 5000
 
