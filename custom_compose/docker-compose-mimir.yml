@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  es:
+    image: elasticsearch:2
+    ports:
+      - 9200
+
+  bragi:
+    image: navitia/bragi
+    environment:
+      - BRAGI_ES=http://es:9200
+    ports:
+      - 4000
+
+  tyr_worker:
+    environment:
+      - TYR_MIMIR_URL=http://es:9200
