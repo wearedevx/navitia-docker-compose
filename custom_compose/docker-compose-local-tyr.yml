@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  tyr_worker:
+    volumes:
+      - ${NAVITIA_PATH}/source/tyr/tyr:/usr/src/app/tyr
+      - ${NAVITIA_PATH}/source/navitiacommon/navitiacommon:/usr/src/app/navitiacommon
+
+  tyr_beat:
+    volumes:
+      - ${NAVITIA_PATH}/source/tyr/tyr:/usr/src/app/tyr
+      - ${NAVITIA_PATH}/source/tyr/migrations:/usr/src/app/migrations
+      - ${NAVITIA_PATH}/source/navitiacommon/navitiacommon:/usr/src/app/navitiacommon
+
+  tyr_web:
+    volumes:
+      - ${NAVITIA_PATH}/source/tyr/tyr:/usr/src/app/tyr
+      - ${NAVITIA_PATH}/source/navitiacommon/navitiacommon:/usr/src/app/navitiacommon
