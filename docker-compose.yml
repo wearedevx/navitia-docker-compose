@@ -81,7 +81,6 @@ services:
     environment:
       - JORMUNGANDR_SQLALCHEMY_DATABASE_URI=postgresql://navitia:navitia@database/jormungandr
       - JORMUNGANDR_INSTANCE_DEFAULT={"key":"default","zmq_socket":"tcp://kraken-default:30000"}
-      - JORMUNGANDR_INSTANCE_ASGARD={"street_network":[{"modes":["bss"],"class":"jormungandr.street_network.kraken.Kraken"},{"args":{"costing_options":{"bicycle":{"bicycle_type":"Hybrid"}},"api_key":"","asgard_socket":"tcp://asgard:6000","service_url":"http://localhost:8002","timeout":20},"modes":["car","bike","walking"],"class":"jormungandr.street_network.asgard.Asgard"}],"key":"asgard","zmq_socket":"tcp://kraken-default:30000"}
     ports:
       - "9191:80"
 
