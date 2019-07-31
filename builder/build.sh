@@ -77,7 +77,7 @@ TARGETS="protobuf_files kraken ed_executables cities integration_tests_bin"
 run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
 run make -j$(nproc) $TARGETS
 
-strip --strip-unneeded tests/*_test kraken/kraken ed/*2ed cities/cities ed/ed2nav
+strip --strip-unneeded tests/mock-kraken/*_test kraken/kraken ed/*2ed cities/cities ed/ed2nav
 
 pushd $navitia_dir
 version=$(git describe)

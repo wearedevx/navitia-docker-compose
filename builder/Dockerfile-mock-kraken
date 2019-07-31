@@ -23,7 +23,7 @@ RUN apt-get update && \
                       netcat
 
 RUN mkdir -p /srv/kraken
-COPY tests/*_test /srv/kraken/
+COPY tests/mock-kraken/*_test /srv/kraken/
 WORKDIR /srv/kraken
 EXPOSE 30000
 ENV KRAKEN_GENERAL_zmq_socket=tcp://*:30000
