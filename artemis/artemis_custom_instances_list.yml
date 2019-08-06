@@ -2,10 +2,13 @@ instances:
 - airport-01: 
     test_class: Airport1
 - guichet-unique:
-    env: [KRAKEN_GENERAL_is_realtime_enabled=true, KRAKEN_GENERAL_is_realtime_add_enabled=true, KRAKEN_BROKER_rt_topics=realtime.cots]
+    kraken_env: [KRAKEN_GENERAL_is_realtime_enabled=true, KRAKEN_GENERAL_is_realtime_add_enabled=true, KRAKEN_BROKER_rt_topics=realtime.cots]
     test_class: GuichetUnique
 - fr-auv: 
     test_class: Auvergne
+- fr-auv:
+    test_class: AuvAsgard
+    jormun_env: ', "street_network":[{"modes":["bss"],"class":"jormungandr.street_network.kraken.Kraken"},{"args":{"costing_options":{"bicycle":{"bicycle_type":"Hybrid"}},"api_key":"","asgard_socket":"tcp://asgard:6000","service_url":"http://localhost:8002","timeout":20},"modes":["car","bike","walking"],"class":"jormungandr.street_network.asgard.Asgard"}]'
 - corr-02: 
     test_class: Corr02
 - prolong-mano: 
