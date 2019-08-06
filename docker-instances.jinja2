@@ -8,7 +8,7 @@ services:
         - KRAKEN_GENERAL_instance_name={{instance}}
         - KRAKEN_GENERAL_database=/srv/ed/output/{{instance}}.nav.lz4
         - KRAKEN_BROKER_host=rabbitmq
-        {% for parameter in env %}
+        {% for parameter in kraken_env %}
         - {{ parameter }}
         {% endfor %}
     volumes_from:
