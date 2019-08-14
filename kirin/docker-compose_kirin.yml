@@ -9,7 +9,7 @@ services:
     volumes:
       - kirin_app:/usr/src/app
     ports:
-     - "9090:9090"
+     - "9292:9090"
 
   kirin_background:
     image: kirin:${KIRIN_TAG}
