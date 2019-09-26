@@ -10,3 +10,4 @@ services:
       - asgard-data
     ports:
       - "6000:6000"
+      - "8080:8080"
