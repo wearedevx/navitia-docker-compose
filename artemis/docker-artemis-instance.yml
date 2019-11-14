@@ -134,17 +134,6 @@ services:
     expose:
       - "30000"
 
-  kraken-fr-pdl:
-    image: navitia/kraken:${TAG}
-    environment:
-        - KRAKEN_GENERAL_instance_name=fr-pdl
-        - KRAKEN_GENERAL_database=/srv/ed/output/fr-pdl.nav.lz4
-        - KRAKEN_BROKER_host=rabbitmq
-    volumes_from:
-      - tyr_beat:ro
-    expose:
-      - "30000"
-
   kraken-nb-corr-04:
     image: navitia/kraken:${TAG}
     environment:
@@ -445,8 +434,6 @@ services:
 
       - JORMUNGANDR_INSTANCE_map={"key":"map","zmq_socket":"tcp://kraken-map:30000"}
 
-      - JORMUNGANDR_INSTANCE_fr-pdl={"key":"fr-pdl","zmq_socket":"tcp://kraken-fr-pdl:30000"}
-
       - JORMUNGANDR_INSTANCE_nb-corr-04={"key":"nb-corr-04","zmq_socket":"tcp://kraken-nb-corr-04:30000"}
 
       - JORMUNGANDR_INSTANCE_freqgtfs={"key":"freqgtfs","zmq_socket":"tcp://kraken-freqgtfs:30000"}
@@ -530,8 +517,6 @@ services:
       - INSTANCE_rebroussement=
 
       - INSTANCE_map=
-
-      - INSTANCE_fr-pdl=
 
       - INSTANCE_nb-corr-04=
 
