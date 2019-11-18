@@ -14,6 +14,11 @@ it allow to not compile at each run so it's faster to run.
     docker build -t navitia-builder --build-arg BUILD=1 .
 ```
 
+To avoid using all processors while compiling Navitia (and bringing the machine to its knees), use the argument `NB_PROC_TO_IGNORE` 
+For ex, on a machine with 8 processing units, use only 6 with:
+```
+    docker build -t navitia-builder --build-arg BUILD=1 --build-arg NB_PROC_TO_IGNORE=2 .
+```
 Then use to build the images, you need to mount your docker's socket into the builder.
 It will compile navitia from scratch and create the images
 ```
@@ -24,12 +29,17 @@ This should take a while.
 
 If you want to build the docker on your own sources you can mount your navitia sources. 
 You also need to add the `n` flag to the builder for the script not to update the sources
-
 ```
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {your_path_to_navitia}:/build/navitia navitia-builder -n
+    docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {your_path_to_navitia}:/build/navitia navitia-builder -n
 ```
 
-those images are available on dockerhub and are used in the docker compose
+*Tip: for every options available when running `navitia-builder`, there's a help*:
+```
+    docker run navitia-builder -h
+```
+
+
+The images built here are also available on dockerhub and are used in the docker compose.
 
 
 If you want to use them without the docker compose, you will need some configuration files and to mount them

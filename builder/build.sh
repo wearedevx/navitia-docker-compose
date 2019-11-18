@@ -9,6 +9,7 @@ Usage: ${0##*/} [-lr] [-b branch] [-u user] [-p password]
     -u      username for authentication on registry
     -p      password for authentication on registry
     -n      does not update the sources (if the sources have been provided by volume for example)
+    -i      number of processors to ignore while compiling
 EOF
 }
 
@@ -30,8 +31,9 @@ user=''
 password=''
 components='jormungandr kraken tyr-beat tyr-worker tyr-web instances-configurator mock-kraken'
 navitia_local=0
+nb_procs_to_ignore=0
 
-while getopts "lrnb:u:p:" opt; do
+while getopts "lrnb:u:p:i:" opt; do
     case $opt in
         b)
             branch=$OPTARG
@@ -50,6 +52,9 @@ while getopts "lrnb:u:p:" opt; do
             ;;
         r)
             push=1
+            ;;
+        i)
+            nb_procs_to_ignore=$OPTARG
             ;;
         h|\?)
             show_help
@@ -75,7 +80,7 @@ fi
 TARGETS="protobuf_files kraken ed_executables cities integration_tests_bin"
 
 run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
-run make -j$(nproc --ignore=2) $TARGETS
+run make -j$(nproc --ignore=$nb_procs_to_ignore) $TARGETS
 
 strip --strip-unneeded tests/mock-kraken/*_test kraken/kraken ed/*2ed cities/cities ed/ed2nav
 
