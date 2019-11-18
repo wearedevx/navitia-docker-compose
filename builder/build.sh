@@ -80,7 +80,7 @@ fi
 TARGETS="protobuf_files kraken ed_executables cities integration_tests_bin"
 
 run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
-run make -j$(nproc --ignore=2) $TARGETS
+run make -j$(nproc --ignore=$nb_procs_to_ignore) $TARGETS
 
 strip --strip-unneeded tests/mock-kraken/*_test kraken/kraken ed/*2ed cities/cities ed/ed2nav
 

@@ -42,8 +42,10 @@ You also need to add the `n` flag to the builder for the script not to update th
 _Tip: for every options available when running `navitia-builder`, there's a help_:
 
 ```
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {your_path_to_navitia}:/build/navitia navitia-builder -n
+    docker run navitia-builder -h
 ```
+
+The images built here are also available on dockerhub and are used in the docker compose.
 
 The images built here are also available on dockerhub and are used in the docker compose.
 
