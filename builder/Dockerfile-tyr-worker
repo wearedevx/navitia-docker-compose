@@ -2,7 +2,7 @@ FROM debian:8
 ENV MIMIR_PKG_URL=https://ci.navitia.io/job/mimirsbrunn_release_package/lastSuccessfulBuild/artifact/*zip*/archive.zip
 ENV COSMOGONY2CITIES_PKG_URL=https://ci.navitia.io/view/mimir/job/cosmogony2cities_deb/lastSuccessfulBuild/artifact/*zip*/archive.zip
 
-RUN apt-get update && \
+RUN apt-get update --fix-missing && \
             apt-get upgrade -y && \
             apt-get install -y libpqxx-4.0 \
                                 libgoogle-perftools4 \
