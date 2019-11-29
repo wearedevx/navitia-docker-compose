@@ -1,6 +1,6 @@
 FROM debian:8
 
-RUN apt-get update && \
+RUN apt-get update --fix-missing && \
     apt-get upgrade -y && \
     apt-get install -y libzmq3 \
                       libpqxx-4.0 \
