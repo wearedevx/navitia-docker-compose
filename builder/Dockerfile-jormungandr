@@ -5,30 +5,20 @@ COPY navitia/source/jormungandr/requirements.txt /usr/src/app
 COPY navitia/source/jormungandr/jormungandr /usr/src/app/jormungandr
 COPY navitia/source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
 
-RUN echo @testing http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
-
-RUN apk --update --no-cache add \
-        g++ \
-        build-base \
+RUN apt-get update --fix-missing \
+    &&  apt-get upgrade -y \
+    &&  apt-get install -y \
+        build-essential \
         python-dev \
-        git \
-        geos@testing \
-        postgresql-dev \
-        libxslt \
-        libxml2-dev \
-        libxslt-dev \
-        libpq \
-        curl && \
-    pip install --no-cache-dir -r requirements.txt && \
-    apk --no-cache del \
-        g++ \
-        build-base \
+        libgeos-c1 \
+        libpq-dev \
+        python-setuptools \
+        curl \
+    &&  pip install --no-cache-dir -r requirements.txt \
+    &&  apt-get autoremove -y \
+        build-essential \
         python-dev \
-        zlib-dev \
-        musl-dev \
-        postgresql-dev \
-        libxml2-dev \
-        libxslt-dev
+        python-setuptools
 
 # ....
 # I don't see a better way, geos try to find libc and fail, so ugly hack to give it

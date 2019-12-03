@@ -6,25 +6,20 @@ COPY navitia/source/tyr/tyr /usr/src/app/tyr
 COPY navitia/source/tyr/manage_tyr.py /usr/src/app/
 COPY navitia/source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
 
-RUN echo @testing http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
-
-RUN apk --update --no-cache add \
-        git \
+RUN apt-get update --fix-missing \
+    &&  apt-get upgrade -y \
+    &&  apt-get install -y \
         python-dev \
-        build-base \
-        linux-headers \
-        postgresql-dev \
-        gcc \
-        geos@testing \
-        musl-dev \
+        build-essential \
+        libgeos-c1 \
+        libpq5 \
+        libpq-dev \
+        python-setuptools \
+    &&  pip install --no-cache-dir -r requirements.txt \
+    &&  apt-get autoremove -y \
         python-dev \
-    && pip install --no-cache-dir -r requirements.txt \
-    && apk --no-cache del \
-            python-dev \
-            git \
-            build-base \
-            linux-headers \
-            gcc
+        build-essential \
+        python-setuptools
 
 COPY tyr_settings.py /srv/navitia/settings.py
 
