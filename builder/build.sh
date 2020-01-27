@@ -74,7 +74,6 @@ else
     echo "building branch $branch"
     pushd $navitia_dir
     run git checkout $branch && git fetch origin && git pull origin $branch && git submodule update --init --recursive
-    run git log -5
     popd
 fi
 
@@ -82,11 +81,6 @@ TARGETS="protobuf_files kraken ed_executables cities integration_tests_bin"
 
 run cmake -DCMAKE_BUILD_TYPE=Release $navitia_dir/source
 run make -j$(nproc --ignore=$nb_procs_to_ignore) $TARGETS
-
-echo " ------- Check Sources -------"
-echo $(pwd)
-ls -l
-
 
 strip --strip-unneeded tests/mock-kraken/*_test kraken/kraken ed/*2ed cities/cities ed/ed2nav
 
@@ -96,7 +90,7 @@ echo "building version $version"
 popd
 
 for component in $components; do
-    run docker build -t navitia/$component:$version -f  Dockerfile-$component .
+    run docker build --no-cache -t navitia/$component:$version -f  Dockerfile-$component .
         docker tag navitia/$component:$version navitia/$component:$branch
     if [ $tag_latest -eq 1 ]; then
         docker tag navitia/$component:$version navitia/$component:latest
