@@ -36,8 +36,6 @@ COPY navitia/source/tyr/manage_tyr.py /usr/src/app/manage_tyr.py
 COPY navitia/source/navitiacommon/navitiacommon /usr/src/app/navitiacommon
 COPY navitia/source/sql/alembic /usr/share/navitia/ed/alembic
 
-
-
 COPY ed/fusio2ed /usr/bin/fusio2ed
 COPY ed/ed2nav /usr/bin/ed2nav
 COPY ed/osm2ed /usr/bin/osm2ed
@@ -45,11 +43,6 @@ COPY ed/poi2ed /usr/bin/poi2ed
 COPY ed/gtfs2ed /usr/bin/gtfs2ed
 COPY ed/geopal2ed /usr/bin/geopal2ed
 COPY cities/cities /usr/bin/cities
-
-RUN echo " ======================================================================================="
-RUN echo $(pwd)
-RUN ls -l /usr/bin/ed2nav
-RUN ls -l /usr/bin/cities
 
 # install mimir packages
 RUN wget --quiet $MIMIR_PKG_URL -O /tmp/mimir_pkg.zip && \
