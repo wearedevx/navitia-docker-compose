@@ -73,7 +73,7 @@ if [ $navitia_local -eq 1 ]; then
 else
     echo "building branch $branch"
     pushd $navitia_dir
-    run git pull && git checkout $branch && git submodule update --init --recursive
+    run git checkout $branch && git fetch origin && git pull origin $branch && git submodule update --init --recursive
     popd
 fi
 
@@ -90,7 +90,7 @@ echo "building version $version"
 popd
 
 for component in $components; do
-    run docker build -t navitia/$component:$version -f  Dockerfile-$component .
+    run docker build --no-cache -t navitia/$component:$version -f  Dockerfile-$component .
         docker tag navitia/$component:$version navitia/$component:$branch
     if [ $tag_latest -eq 1 ]; then
         docker tag navitia/$component:$version navitia/$component:latest
