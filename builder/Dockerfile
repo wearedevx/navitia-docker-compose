@@ -17,7 +17,7 @@ RUN git submodule update --init --recursive
 #navitia will be compiled at the build of the image, it's useful for debugging purpose
 ARG BUILD=0
 ARG NB_PROC_TO_IGNORE=0
-RUN if [ $BUILD -eq 1 ]; then cmake -DCMAKE_BUILD_TYPE=Release source && make -j$(nproc --ignore=$NB_PROC_TO_IGNORE); fi
+RUN if [ $BUILD -eq 1 ]; then cmake -DCMAKE_BUILD_TYPE=Release -DSKIP_TESTS=ON -DSTRIP_SYMBOLS=ON source && make -j$(nproc --ignore=$NB_PROC_TO_IGNORE); fi
 
 WORKDIR /build
 
