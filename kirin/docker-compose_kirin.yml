@@ -2,7 +2,7 @@ version: "2"
 
 services:
   kirin:
-    image: kirin:${KIRIN_TAG}
+    image: navitia/kirin:${KIRIN_TAG}
     restart: always
     env_file: kirin/kirin.env
     volumes:
@@ -11,7 +11,7 @@ services:
       - "9292:9090"
 
   kirin_background:
-    image: kirin:${KIRIN_TAG}
+    image: navitia/kirin:${KIRIN_TAG}
     restart: always
     depends_on:
       - kirin_configurator
@@ -28,7 +28,7 @@ services:
       - "9494:5432"
 
   kirin_configurator:
-    image: kirin_configurator:${KIRIN_TAG}
+    image: navitia/kirin_configurator:${KIRIN_TAG}
     env_file: kirin/kirin.env
     working_dir: /usr/src/app
     depends_on:
