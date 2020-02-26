@@ -1,72 +1,75 @@
 instances:
-- airport-01: 
-    test_class: Airport1
-- guichet-unique:
-    kraken_env: [KRAKEN_GENERAL_is_realtime_enabled=true, KRAKEN_GENERAL_is_realtime_add_enabled=true, KRAKEN_BROKER_rt_topics=realtime.cots]
-    test_class: GuichetUnique
-- fr-auv: 
-    test_class: Auvergne
-- corr-02: 
-    test_class: Corr02
-- prolong-mano: 
-    test_class: ProlongMano
-- bibus: 
-    test_class: Bibus
-- mission: 
-    test_class: Mission
-- test-01: 
-    test_class: ArtTest01
-- test-02: 
-    test_class: ArtTest02
-- test-03: 
-    test_class: ArtTest03
-- rebroussement: 
-    test_class: Rebroussement
-- map: 
-    test_class: Map
-- nb-corr-01: 
-    test_class: NbCorr01
-- nb-corr-02: 
-    test_class: NbCorr02
-- nb-corr-03: 
-    test_class: NbCorr03
-- nb-corr-04: 
-    test_class: NbCorr04
-- nb-corr-05: 
-    test_class: NbCorr05
-- freqgtfs: 
-    test_class: FreqGtfs
-- corr-01: 
-    test_class: Corr01
-- passe-minuit-01: 
-    test_class: PasseMinuit01
-- freqparis: 
-    test_class: FreqParis
-- itl: 
-    test_class: Itl
-- poitiers: 
-    test_class: Poitiers
-
-  - boucle-01:
-      test_class: Boucle01
-  - saintomer:
-      test_class: SaintOmer
   - airport:
       test_class: Airport
-  - tcl:
-      test_class: TCL
-  - passe-minuit-02:
-      test_class: PasseMinuit02
-
-  - prolong-auto:
-      test_class: ProlongAuto
-  - mdi:
-      test_class: MDI
-  - freqsimple:
-      test_class: FreqSimple
+  - airport-01:
+      test_class: Airport1
+  - test-01:
+      test_class: ArtTest01
+  - test-02:
+      test_class: ArtTest02
+  - test-03:
+      test_class: ArtTest03
+  - fr-auv:
+      test_class: Auvergne
+  - bibus:
+      test_class: Bibus
+  - boucle-01:
+      test_class: Boucle01
+  - corr-01:
+      test_class: Corr01
+  - corr-02:
+      test_class: Corr02
+  - freqgtfs:
+      test_class: FreqGtfs
   - freqgtfs-01:
       test_class: FreqGtfs_01
+  - freqparis:
+      test_class: FreqParis
+  - freqsimple:
+      test_class: FreqSimple
+  - guichet-unique:
+      kraken_env:
+        [
+          KRAKEN_GENERAL_is_realtime_enabled=true,
+          KRAKEN_GENERAL_is_realtime_add_enabled=true,
+          KRAKEN_BROKER_rt_topics=realtime.cots,
+        ]
+      test_class: GuichetUnique
+  - itl:
+      test_class: Itl
+  - map:
+      test_class: Map
+  - mdi:
+      test_class: MDI
+  - mission:
+      test_class: Mission
+  - nb-corr-01:
+      test_class: NbCorr01
+  - nb-corr-02:
+      test_class: NbCorr02
+  - nb-corr-03:
+      test_class: NbCorr03
+  - nb-corr-04:
+      test_class: NbCorr04
+  - nb-corr-05:
+      test_class: NbCorr05
+  - passe-minuit-01:
+      test_class: PasseMinuit01
+  - passe-minuit-02:
+      test_class: PasseMinuit02
+  - poitiers:
+      test_class: Poitiers
+  - prolong-auto:
+      test_class: ProlongAuto
+  - prolong-mano:
+      test_class: ProlongMano
+  - rebroussement:
+      test_class: Rebroussement
+  - saintomer:
+      test_class: SaintOmer
   - sherbrooke:
       test_class: Sherbrooke
   - tad:
       test_class: Tad
+  - tcl:
+      test_class: TCL
