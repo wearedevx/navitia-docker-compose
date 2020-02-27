@@ -28,13 +28,18 @@ instances:
   - freqsimple:
       test_class: FreqSimple
   - guichet-unique:
+      test_class: GuichetUnique
       kraken_env:
         [
           KRAKEN_GENERAL_is_realtime_enabled=true,
           KRAKEN_GENERAL_is_realtime_add_enabled=true,
+          KRAKEN_GENERAL_is_realtime_add_trip_enabled=true,
           KRAKEN_BROKER_rt_topics=realtime.cots,
+          KRAKEN_BROKER_port=5672,
+          KRAKEN_BROKER_username=guest,
+          KRAKEN_BROKER_password=guest,
+          KRAKEN_BROKER_exchange=navitia,
         ]
-      test_class: GuichetUnique
   - itl:
       test_class: Itl
   - map:
