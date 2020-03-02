@@ -72,7 +72,7 @@ services:
       - POSTGRES_USER=navitia
       - POSTGRES_PASSWORD=navitia
       - POSTGRES_DB=cities
-    image: mdillon/postgis:9.5
+    image: mdillon/postgis:9.1
 
 volumes:
   tyr_data:
