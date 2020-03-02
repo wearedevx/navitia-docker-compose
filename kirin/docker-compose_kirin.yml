@@ -5,9 +5,9 @@ services:
   kirin:
     image: navitia/kirin:${KIRIN_TAG}
     restart: always
-    env_file: kirin/kirin.env 
-    volumes:
-      - kirin_app:/usr/src/app
+    env_file: kirin/kirin.env
+    depends_on:
+      - kirin_configurator
     ports:
      - "9292:9090"
 
@@ -16,7 +16,7 @@ services:
     restart: always
     depends_on:
       - kirin_configurator
-    command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; python ./manage.py load_realtime"
+    command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; sleep 10; python ./manage.py load_realtime"
     env_file: kirin/kirin.env
 
   kirin_database:
@@ -29,16 +29,12 @@ services:
      - "9494:5432"
 
   kirin_configurator:
-    image: navitia/kirin_configurator:${KIRIN_TAG}
+    image: navitia/kirin:${KIRIN_TAG}
     env_file: kirin/kirin.env
     working_dir: /usr/src/app
     depends_on:
       - "kirin_database"
-    volumes_from:
-      - kirin
+    command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; python manage.py db upgrade"
 
   rabbitmq_kirin:
     image: rabbitmq:management
-
-volumes:
-  kirin_app:
