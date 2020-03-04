@@ -91,7 +91,8 @@ services:
     environment:
       - TYR_CITIES_DATABASE_URI=postgresql://navitia:navitia@cities_database/cities
       - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
-
+      - TYR_KRAKEN_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+       
   tyr_beat:
     image: navitia/tyr-beat:${TAG}
     volumes:
