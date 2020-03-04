@@ -22,34 +22,6 @@ services:
       - TYR_DATABASE_FILE=/srv/ed
       - AUTH_TOKEN=${UPDATER_AUTH_TOKEN}
 
-  chaos:
-    build:
-      context: ./chaos
-    ports:
-      - "5001:5001"
-    environment:
-      - SQLALCHEMY_DATABASE_URI=postgresql://navitia:navitia@chaos_database/chaos
-      - RABBITMQ_CONNECTION_STRING=amqp://guest:guest@rabbitmq:5672//
-      - NAVITIA_URL=http://localhost:9191
-      - DOMAIN_NAME=chaos-ws.local.canaltp.fr
-      - CACHE_TYPE=redis
-      - CACHE_REDIS_HOST=redis
-      - NAVITIA_CACHE_TIMEOUT=86400
-      - NAVITIA_PUBDATE_CACHE_TIMEOUT=10
-    links:
-      - chaos_database
-      - rabbitmq
-    depends_on:
-      - chaos_database
-      - rabbitmq
-
-  chaos_database:
-    image: postgres:9.4
-    environment:
-      - POSTGRES_USER=navitia
-      - POSTGRES_PASSWORD=navitia
-      - POSTGRES_DB=chaos
-
   database:
     environment:
       - POSTGRES_USER=navitia
@@ -92,7 +64,7 @@ services:
       - TYR_CITIES_DATABASE_URI=postgresql://navitia:navitia@cities_database/cities
       - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
       - TYR_KRAKEN_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-       
+
   tyr_beat:
     image: navitia/tyr-beat:${TAG}
     volumes:

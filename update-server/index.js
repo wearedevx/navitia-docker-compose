@@ -5,19 +5,15 @@ const updater = require("./src/index");
 
 const app = express();
 
-app.use(bodyParser.json({ limit: "1000mb" }));
-
-console.log("OK NEW VERSION !!");
-
-const { AUTH_TOKEN } = process.env;
+app.use(bodyParser.json());
 
 function simpleAuthCheck(req, res, next) {
+  const { AUTH_TOKEN } = process.env;
+
   const token = (req.headers.authorization || "").replace("Bearer ", "");
 
   if (!token || token === "" || token !== AUTH_TOKEN) {
-    res
-      .status(401)
-      .send(`Unauthorized: ${AUTH_TOKEN} / ${req.headers.authorization}`);
+    res.status(401).send("Unauthorized");
   } else {
     next();
   }
