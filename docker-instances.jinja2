@@ -22,6 +22,8 @@ services:
 {% for instance in instances %}
       - JORMUNGANDR_INSTANCE_{{instance}}={"key":"{{instance}}","zmq_socket":"tcp://kraken-{{instance}}:30000"{{jormun_env}}}
 {% endfor %}
+      - JORMUNGANDR_CACHE_CONFIGURATION={"CACHE_TYPE":"simple", "CACHE_KEY_PREFIX":"jormungandr.", "TIMEOUT_PTOBJECTS":0.001, "TIMEOUT_AUTHENTICATION":0.001, "TIMEOUT_PARAMS":0.001, "TIMEOUT_TIMEO":60, "TIMEOUT_SYNTHESE":30}
+
 
   instances_configurator:
     environment:
