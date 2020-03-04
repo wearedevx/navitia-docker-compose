@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 services:
   instances_configurator:
@@ -10,6 +10,17 @@ services:
       - kraken_instance_conf:/srv/kraken
     environment:
       - INSTANCE_default=
+
+  update_server:
+    build:
+      context: ./update-server
+    ports:
+      - "5000:5000"
+    volumes:
+      - tyr_data:/srv/ed
+    environment:
+      - TYR_DATABASE_FILE=/srv/ed
+      - AUTH_TOKEN=${UPDATER_AUTH_TOKEN}
 
   database:
     environment:
@@ -51,7 +62,7 @@ services:
       - TYR_CITIES_DATABASE_URI=postgresql://navitia:navitia@cities_database/cities
       - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
       - TYR_KRAKEN_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-       
+
   tyr_beat:
     image: navitia/tyr-beat:${TAG}
     volumes:
@@ -65,7 +76,7 @@ services:
     volumes_from:
       - tyr_beat
     ports:
-      - '9898:80'
+      - "9898:80"
     environment:
       - TYR_CITIES_DATABASE_URI=postgresql://navitia:navitia@cities_database/cities
       - TYR_CITIES_OSM_FILE_PATH=/srv/ed/
