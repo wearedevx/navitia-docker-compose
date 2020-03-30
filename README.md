@@ -44,7 +44,7 @@ http://localhost:9191/v1/coverage/default/lines
 
 ## Additional instances
 
-If you need additional instances, you can use the `docker-instances.jinja2` to generate another docker-compose file (if you want to do some shiny service discovery instead of this quick and dirty jinja template, we'll hapilly accept the contribution :wink: )
+> If you need additional instances, you can use the `docker-instances.jinja2` to generate another docker-compose file (if you want to do some shiny service discovery instead of this quick and dirty jinja template, we'll hapilly accept the contribution :wink: )
 
 You'll need to install [j2cli](https://github.com/kolypto/j2cli)
 
@@ -64,7 +64,7 @@ To add data to a given instance, you'll need to do:
 
 ## Tweak images
 
-By default, the tag `:latest` will be used when images are pulled. If you want to use diferent tags, set the `TAG` envar. For instance, to run the `dev` images for development purposes, run:
+> By default, the tag `:latest` will be used when images are pulled. If you want to use diferent tags, set the `TAG` envar. For instance, to run the `dev` images for development purposes, run:
 
 `TAG=dev docker-compose -f docker-compose.yml -f additional_navitia_instances.yml up`
 
