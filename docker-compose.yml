@@ -73,6 +73,8 @@ services:
       - tyr_beat:ro
     expose:
       - "30000"
+    links:
+      - rabbitmq
 
   jormungandr:
     image: navitia/jormungandr:${TAG}
@@ -115,6 +117,43 @@ services:
       - POSTGRES_PASSWORD=navitia
       - POSTGRES_DB=cities
     image: mdillon/postgis:9.1
+
+  kirin:
+    image: navitia/kirin:${KIRIN_TAG}
+    restart: always
+    env_file: kirin/kirin.env
+    depends_on:
+      - kirin_configurator
+    ports:
+      - "9292:9090"
+
+  kirin_background:
+    image: navitia/kirin:${KIRIN_TAG}
+    restart: always
+    depends_on:
+      - kirin_configurator
+    command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; sleep 10; python ./manage.py load_realtime"
+    env_file: kirin/kirin.env
+
+  kirin_database:
+    image: mdillon/postgis:9.5
+    environment:
+      - POSTGRES_USER=navitia
+      - POSTGRES_PASSWORD=navitia
+      - POSTGRES_DB=kirin
+    ports:
+      - "9494:5432"
+
+  kirin_configurator:
+    image: navitia/kirin:${KIRIN_TAG}
+    env_file: kirin/kirin.env
+    working_dir: /usr/src/app
+    depends_on:
+      - "kirin_database"
+    command: sh -c "while ! pg_isready -h kirin_database -d kirin -U navitia; do sleep 5; done; python manage.py db upgrade"
+
+  rabbitmq_kirin:
+    image: rabbitmq:management
 
 volumes:
   tyr_data:
