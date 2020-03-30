@@ -1,2 +1,5 @@
 data/dumb_ntfs/**/*
 .DS_Store
+update-server/navitia-base-data*
+tmp
+node_modules
