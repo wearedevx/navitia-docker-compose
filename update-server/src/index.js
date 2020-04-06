@@ -176,7 +176,12 @@ async function createZip(baseData, archivePath, files) {
  */
 module.exports = async function(req, res) {
   // const tempDir = getTempDir();
-  const baseData = await readDataDir();
+  let baseData = await readDataDir();
+
+  if (req.query.noBaseData) {
+    baseData = []
+    console.log('NO BASE DATA')
+  }
 
   const archivePath = path.join(
     TYR_DATABASE_FILE,
