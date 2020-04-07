@@ -1,96 +1,108 @@
-const path = require("path");
-const os = require("os");
-const fs = require("fs");
-const uuid = require("uuid").v4;
-const rmrf = require("rimraf");
+const path = require("path")
+const os = require("os")
+const fs = require("fs")
+const uuid = require("uuid").v4
+const rmrf = require("rimraf")
+const csvtojson = require("csvtojson")
+const archiver = require("archiver")
+const converter = require('json-2-csv')
 
-const archiver = require("archiver");
+const { execSync } = require("child_process")
 
-const { execSync } = require("child_process");
+const { readDataDir } = require("./baseData")
+const { calculateNearestBusStops } = require("./nearesBusStops")
 
-const { readDataDir } = require("./baseData");
+const { TYR_DATABASE_FILE } = process.env
 
-const { TYR_DATABASE_FILE } = process.env;
-
-const Readable = require("stream").Readable;
+const Readable = require("stream").Readable
 
 function ReadableFromString(string) {
-  const s = new Readable();
-  s._read = () => {}; // redundant? see update below
-  s.push(string);
-  s.push(null);
+  const s = new Readable()
+  s._read = () => {} // redundant? see update below
+  s.push(string)
+  s.push(null)
 
-  return s;
+  return s
 }
 
+function getCsvFromJson(json) {
+  return new Promise((resolve, reject) => {
+    converter.json2csv(json, function(err, csv) {
+      if (err) reject(err)
+      resolve(csv)
+    })
+  })
+}
+
+
 async function mergeDatasets(base, files) {
-  const tempDir = path.join(os.tmpdir(), uuid());
-  fs.mkdirSync(tempDir);
-  const keys = Object.keys(base);
+  const tempDir = path.join(os.tmpdir(), uuid())
+  fs.mkdirSync(tempDir)
+  const keys = Object.keys(base)
 
   Object.keys(files).forEach(filename => {
     if (!keys.includes(filename)) {
-      keys.push(filename);
+      keys.push(filename)
     }
-  });
+  })
 
-  console.debug("Keys in datasets:", keys);
+  console.debug("Keys in datasets:", keys)
 
   const promises = keys.map(
     key =>
       new Promise((resolve, reject) => {
         try {
-          const fileToWrite = path.join(tempDir, key);
-          const w = fs.createWriteStream(fileToWrite, { flags: "a" });
-          console.debug("Will write", fileToWrite);
+          const fileToWrite = path.join(tempDir, key)
+          const w = fs.createWriteStream(fileToWrite, { flags: "a" })
+          console.debug("Will write", fileToWrite)
 
           if (base[key]) {
-            const fileToAppendTo = base[key];
-            console.debug("Will read", fileToAppendTo);
-            const original = fs.createReadStream(fileToAppendTo);
+            const fileToAppendTo = base[key]
+            console.debug("Will read", fileToAppendTo)
+            const original = fs.createReadStream(fileToAppendTo)
 
-            original.pipe(w, { end: false });
+            original.pipe(w, { end: false })
 
             original.on("end", () => {
               if (files[key]) {
                 // remove the csv header
-                const values = files[key].split("\n");
-                values.shift();
+                const values = files[key].split("\n")
+                values.shift()
 
-                ReadableFromString(values.join("\n")).pipe(w);
+                ReadableFromString(values.join("\n")).pipe(w)
               } else {
-                w.end();
+                w.end()
               }
-            });
+            })
           } else {
-            ReadableFromString(files[key]).pipe(w);
+            ReadableFromString(files[key]).pipe(w)
           }
 
           w.on("close", function() {
-            console.debug("written", key, "to", fileToWrite);
-            resolve();
-          });
+            console.debug("written", key, "to", fileToWrite)
+            resolve()
+          })
 
           w.on("error", function(error) {
-            reject(error);
-          });
+            reject(error)
+          })
         } catch (err) {
-          console.debug("Something wrong Happend with", key);
-          console.error(err);
+          console.debug("Something wrong Happend with", key)
+          console.error(err)
 
-          reject(err);
+          reject(err)
         }
       })
-  );
+  )
 
-  await Promise.all(promises);
+  await Promise.all(promises)
 
-  return tempDir;
+  return tempDir
 }
 
 function zip(tempDir, archivePath) {
-  console.debug("Ziping", tempDir, "into", archivePath);
-  execSync(`zip -j -r ${archivePath} ${tempDir}/*`);
+  console.debug("Ziping", tempDir, "into", archivePath)
+  execSync(`zip -j -r ${archivePath} ${tempDir}/*`)
 
   // rmrf(tempDir);
 }
@@ -137,18 +149,18 @@ async function createZip(baseData, archivePath, files) {
       mergeDatasets(baseData, files)
         .then(t => zip(t, archivePath))
         .catch(err => {
-          console.error(err);
-          const error = new Error("Failed to create zip file");
-          error.code = "ARCHIVE_FILE_CREATE_FAILED";
-          error.source = err;
-          reject(error);
-        });
+          console.error(err)
+          const error = new Error("Failed to create zip file")
+          error.code = "ARCHIVE_FILE_CREATE_FAILED"
+          error.source = err
+          reject(error)
+        })
     } catch (err) {
-      console.error(err);
-      const error = new Error("Failed to create zip file");
-      error.code = "ARCHIVE_FILE_CREATE_FAILED";
-      error.source = err;
-      reject(error);
+      console.error(err)
+      const error = new Error("Failed to create zip file")
+      error.code = "ARCHIVE_FILE_CREATE_FAILED"
+      error.source = err
+      reject(error)
     }
 
     // tempFiles.forEach(([name, tmpPath]) => {
@@ -165,7 +177,31 @@ async function createZip(baseData, archivePath, files) {
     // archive.finalize();
 
     // tempFiles.remove();
-  });
+  })
+}
+
+async function getTransfers(safirBusStopsCsv) {
+  const safirBusStops = await csvtojson().fromString(safirBusStopsCsv)
+  const safirBusStopsWithNearestBusStops = await calculateNearestBusStops(safirBusStops)
+
+  return safirBusStopsWithNearestBusStops.reduce(
+    (transfers, safirBusStop) => {
+      safirBusStop.nearestBusStops.forEach(nearestBS => {
+        transfers.push({
+          from_stop_id: safirBusStop.stop_id,
+          to_stop_id: nearestBS.stop_id,
+          min_transfer_time: 0,
+          real_min_transfer_time: 0,
+          // min_transfer_time: nearestBS.time,
+          // real_min_transfer_time: nearestBS.time,
+          equipment_id: ""
+        })
+      })
+
+      return transfers
+    },
+    []
+  )
 }
 
 /**
@@ -176,11 +212,14 @@ async function createZip(baseData, archivePath, files) {
  */
 module.exports = async function(req, res) {
   // const tempDir = getTempDir();
-  let baseData = await readDataDir();
+  let baseData = []
 
-  if (req.query.noBaseData) {
-    baseData = []
-    console.log('NO BASE DATA')
+  if (!req.query.noBaseData) {
+    baseData = await readDataDir()
+
+    console.debug('Calculating transfers...')
+    const transfers = await getTransfers(req.body["stops.txt"])
+    req.body["transfers.txt"] = await getCsvFromJson(transfers)
   }
 
   const archivePath = path.join(
@@ -188,11 +227,11 @@ module.exports = async function(req, res) {
     "input",
     "default",
     uuid() + ".zip"
-  );
+  )
 
   // Creates the archive in a temporary directory
   try {
-    createZip(baseData, archivePath, req.body);
+    createZip(baseData, archivePath, req.body)
   } catch (err) {
     switch (err.code) {
       case "ARCHIVE_FILE_CREATE_FAILED":
@@ -200,28 +239,28 @@ module.exports = async function(req, res) {
           success: false,
           reason: "La création de l'archive a échoué",
           error: err
-        });
-        return;
+        })
+        return
 
       case "ARCHIVE_WRITE_ERROR":
         res.status(500).send({
           success: false,
           reason: "Erreur pendant l'écriture dans l'archive",
           error: err
-        });
-        return;
+        })
+        return
 
       default:
         res.status(500).send({
           success: false,
           reason: "Une erreur inconnue est survenue",
           error: err
-        });
-        return;
+        })
+        return
     }
   }
 
   return res.status(200).send({
     success: true
-  });
-};
+  })
+}
