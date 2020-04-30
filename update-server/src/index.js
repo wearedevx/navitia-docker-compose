@@ -5,7 +5,7 @@ const uuid = require("uuid").v4
 const rmrf = require("rimraf")
 const csvtojson = require("csvtojson")
 const archiver = require("archiver")
-const converter = require('json-2-csv')
+const converter = require("json-2-csv")
 
 const { execSync } = require("child_process")
 
@@ -27,20 +27,19 @@ function ReadableFromString(string) {
 
 function getCsvFromJson(json) {
   return new Promise((resolve, reject) => {
-    converter.json2csv(json, function(err, csv) {
+    converter.json2csv(json, function (err, csv) {
       if (err) reject(err)
       resolve(csv)
     })
   })
 }
 
-
 async function mergeDatasets(base, files) {
   const tempDir = path.join(os.tmpdir(), uuid())
   fs.mkdirSync(tempDir)
   const keys = Object.keys(base)
 
-  Object.keys(files).forEach(filename => {
+  Object.keys(files).forEach((filename) => {
     if (!keys.includes(filename)) {
       keys.push(filename)
     }
@@ -49,7 +48,7 @@ async function mergeDatasets(base, files) {
   console.debug("Keys in datasets:", keys)
 
   const promises = keys.map(
-    key =>
+    (key) =>
       new Promise((resolve, reject) => {
         try {
           const fileToWrite = path.join(tempDir, key)
@@ -78,12 +77,12 @@ async function mergeDatasets(base, files) {
             ReadableFromString(files[key]).pipe(w)
           }
 
-          w.on("close", function() {
+          w.on("close", function () {
             console.debug("written", key, "to", fileToWrite)
             resolve()
           })
 
-          w.on("error", function(error) {
+          w.on("error", function (error) {
             reject(error)
           })
         } catch (err) {
@@ -147,8 +146,8 @@ async function createZip(baseData, archivePath, files) {
 
     try {
       mergeDatasets(baseData, files)
-        .then(t => zip(t, archivePath))
-        .catch(err => {
+        .then((t) => zip(t, archivePath))
+        .catch((err) => {
           console.error(err)
           const error = new Error("Failed to create zip file")
           error.code = "ARCHIVE_FILE_CREATE_FAILED"
@@ -180,28 +179,28 @@ async function createZip(baseData, archivePath, files) {
   })
 }
 
-async function getTransfers(safirBusStopsCsv) {
+async function getTransfers(safirBusStopsCsv, includeNavitiaBusStops) {
   const safirBusStops = await csvtojson().fromString(safirBusStopsCsv)
-  const safirBusStopsWithNearestBusStops = await calculateNearestBusStops(safirBusStops)
-
-  return safirBusStopsWithNearestBusStops.reduce(
-    (transfers, safirBusStop) => {
-      safirBusStop.nearestBusStops.forEach(nearestBS => {
-        transfers.push({
-          from_stop_id: safirBusStop.stop_id,
-          to_stop_id: nearestBS.stop_id,
-          min_transfer_time: 0,
-          real_min_transfer_time: 0,
-          // min_transfer_time: nearestBS.time,
-          // real_min_transfer_time: nearestBS.time,
-          equipment_id: ""
-        })
-      })
-
-      return transfers
-    },
-    []
+  const safirBusStopsWithNearestBusStops = await calculateNearestBusStops(
+    safirBusStops,
+    includeNavitiaBusStops
   )
+
+  return safirBusStopsWithNearestBusStops.reduce((transfers, safirBusStop) => {
+    safirBusStop.nearestBusStops.forEach((nearestBS) => {
+      transfers.push({
+        from_stop_id: safirBusStop.stop_id,
+        to_stop_id: nearestBS.stop_id,
+        min_transfer_time: 0,
+        real_min_transfer_time: 0,
+        // min_transfer_time: nearestBS.time,
+        // real_min_transfer_time: nearestBS.time,
+        equipment_id: "",
+      })
+    })
+
+    return transfers
+  }, [])
 }
 
 /**
@@ -210,17 +209,23 @@ async function getTransfers(safirBusStopsCsv) {
  * @param {import("express").Response} response
  * @return {Promise<>}
  */
-module.exports = async function(req, res) {
+module.exports = async function (req, res) {
   // const tempDir = getTempDir();
   let baseData = []
 
   if (!req.query.noBaseData) {
     baseData = await readDataDir()
-
-    console.debug('Calculating transfers...')
-    const transfers = await getTransfers(req.body["stops.txt"])
-    req.body["transfers.txt"] = await getCsvFromJson(transfers)
   }
+
+  console.debug("Calculating transfers...")
+  
+  const transfers = await getTransfers(
+    req.body["stops.txt"],
+    !req.query.noBaseData
+  )
+  req.body["transfers.txt"] = await getCsvFromJson(transfers)
+
+  // console.log(req.body["transfers.txt"])
 
   const archivePath = path.join(
     TYR_DATABASE_FILE,
@@ -238,7 +243,7 @@ module.exports = async function(req, res) {
         res.status(500).send({
           success: false,
           reason: "La création de l'archive a échoué",
-          error: err
+          error: err,
         })
         return
 
@@ -246,7 +251,7 @@ module.exports = async function(req, res) {
         res.status(500).send({
           success: false,
           reason: "Erreur pendant l'écriture dans l'archive",
-          error: err
+          error: err,
         })
         return
 
@@ -254,13 +259,13 @@ module.exports = async function(req, res) {
         res.status(500).send({
           success: false,
           reason: "Une erreur inconnue est survenue",
-          error: err
+          error: err,
         })
         return
     }
   }
 
   return res.status(200).send({
-    success: true
+    success: true,
   })
 }
